@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8we5xh6j8dc7"]
+
+[ext_resource type="Script" path="res://scenes/scripts/level_1.gd" id="1_y5oao"]
+[ext_resource type="PackedScene" uid="uid://d0qn4n25hjihd" path="res://scenes/box.tscn" id="2_408v8"]
+[ext_resource type="PackedScene" uid="uid://blw54ox33juq" path="res://scenes/coin.tscn" id="3_l16fi"]
+[ext_resource type="PackedScene" uid="uid://d2o56q43c2fa7" path="res://scenes/skull.tscn" id="4_igqhe"]
+
+[sub_resource type="Curve2D" id="Curve2D_ob63d"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1142, 540, 0, 0, 0, 0, 1142, 540, 0, 0, 0, 0, 1155.99, 16, 0, 0, 0, 0, 1142, 540)
+}
+point_count = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2m7l"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_y5oao")
+box_scene = ExtResource("2_408v8")
+coin_scene = ExtResource("3_l16fi")
+skull_scene = ExtResource("4_igqhe")
+
+[node name="top" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 1179.0
+offset_bottom = 562.0
+color = Color(0.024357, 1.75888e-05, 0.123784, 1)
+metadata/_edit_lock_ = true
+
+[node name="bottom" type="ColorRect" parent="."]
+offset_left = -8.0
+offset_top = 562.0
+offset_right = 1170.0
+offset_bottom = 670.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="mid" type="ColorRect" parent="."]
+offset_left = -13.0
+offset_top = 559.0
+offset_right = 1152.0
+offset_bottom = 562.0
+color = Color(0.531574, 0.000203016, 0.53164, 1)
+metadata/_edit_lock_ = true
+
+[node name="CoinTimer" type="Timer" parent="."]
+wait_time = 1.05
+autostart = true
+
+[node name="BoxTimer" type="Timer" parent="."]
+wait_time = 1.407
+autostart = true
+
+[node name="SkullTimer" type="Timer" parent="."]
+wait_time = 3.829
+autostart = true
+
+[node name="BoxPath" type="Path2D" parent="."]
+position = Vector2(-0.0133095, 0)
+scale = Vector2(1.00089, 1)
+curve = SubResource("Curve2D_ob63d")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="BoxPath"]
+position = Vector2(1142, 540.094)
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(600, 300)
+scale = Vector2(60, 35)
+shape = SubResource("RectangleShape2D_b2m7l")
+action = "jump"
+
+[connection signal="timeout" from="CoinTimer" to="." method="_on_coin_timer_timeout"]
+[connection signal="timeout" from="BoxTimer" to="." method="_on_box_timer_timeout"]
+[connection signal="timeout" from="SkullTimer" to="." method="_on_skull_timer_timeout"]

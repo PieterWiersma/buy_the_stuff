@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmw2bd3wnlihg"]
+
+[ext_resource type="Script" path="res://scenes/scripts/menu.gd" id="1_8hpx8"]
+[ext_resource type="Texture2D" uid="uid://difi524jggj23" path="res://light.png" id="2_mdaoa"]
+[ext_resource type="Script" path="res://scenes/start_screen.gd" id="3_xqvjt"]
+
+[sub_resource type="SystemFont" id="SystemFont_rkcg8"]
+font_names = PackedStringArray("Al Bayan")
+subpixel_positioning = 0
+
+[node name="Menu" type="CanvasGroup"]
+script = ExtResource("1_8hpx8")
+
+[node name="PlayButton" type="Button" parent="."]
+offset_left = 280.0
+offset_top = 346.0
+offset_right = 483.0
+offset_bottom = 439.0
+text = "PLAY"
+
+[node name="ShopButton" type="Button" parent="."]
+offset_left = 664.0
+offset_top = 347.0
+offset_right = 854.0
+offset_bottom = 438.0
+text = "SHOP"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(572, 314)
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.8)
+texture = ExtResource("2_mdaoa")
+texture_scale = 4.36
+
+[node name="StartScreen" type="ColorRect" parent="."]
+offset_left = -76.0
+offset_top = -88.0
+offset_right = 1320.0
+offset_bottom = 729.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("3_xqvjt")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 224.0
+offset_top = 118.0
+offset_right = 925.0
+offset_bottom = 311.0
+theme_override_fonts/font = SubResource("SystemFont_rkcg8")
+theme_override_font_sizes/font_size = 128
+text = "BUY STUFF"
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 4.335
+one_shot = true
+
+[connection signal="button_down" from="PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_down" from="ShopButton" to="." method="_on_shop_button_button_down"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
