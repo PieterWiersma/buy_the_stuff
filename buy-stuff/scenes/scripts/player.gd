@@ -40,7 +40,7 @@ var n_jumps: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	original_y = position.y
+	pass
 	
 	
 # Called every frame 'delta' is the elapsed time since the previous frame.
@@ -146,6 +146,7 @@ func _on_body_entered( body: Node2D) -> void:
 		coin.emit()
 	elif body.is_in_group('death'):
 		hit.emit()
+
 
 func increase_hover(sec: float):
 	hover_value += sec

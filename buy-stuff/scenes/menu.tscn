@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/scripts/menu.gd" id="1_8hpx8"]
 [ext_resource type="Texture2D" uid="uid://difi524jggj23" path="res://light.png" id="2_mdaoa"]
-[ext_resource type="Script" path="res://scenes/start_screen.gd" id="3_xqvjt"]
+[ext_resource type="Script" path="res://scenes/scripts/start_screen.gd" id="3_xqvjt"]
 
 [sub_resource type="SystemFont" id="SystemFont_rkcg8"]
 font_names = PackedStringArray("Al Bayan")

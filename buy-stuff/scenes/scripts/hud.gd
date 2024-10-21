@@ -10,11 +10,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_player_hit() -> void:
+func on_player_hit() -> void:
 	$DeadTimer.start()
+	$Dead.show()
 
 func _on_dead_timer_timeout() -> void:
-	dead_timer_timeout.emit() 
+	$Dead.hide()
 
 func set_coins(coins: int):
 	$coins.text = "coins: " + str(coins)

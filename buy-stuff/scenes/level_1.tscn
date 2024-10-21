@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8we5xh6j8dc7"]
+[gd_scene load_steps=10 format=3 uid="uid://c8we5xh6j8dc7"]
 
 [ext_resource type="Script" path="res://scenes/scripts/level_1.gd" id="1_y5oao"]
 [ext_resource type="PackedScene" uid="uid://d0qn4n25hjihd" path="res://scenes/box.tscn" id="2_408v8"]
 [ext_resource type="PackedScene" uid="uid://blw54ox33juq" path="res://scenes/coin.tscn" id="3_l16fi"]
 [ext_resource type="PackedScene" uid="uid://d2o56q43c2fa7" path="res://scenes/skull.tscn" id="4_igqhe"]
 [ext_resource type="Shader" path="res://shaders/TV.gdshader" id="5_nv8p6"]
+[ext_resource type="PackedScene" uid="uid://cj1wfbykg7nbg" path="res://scenes/player_hud.tscn" id="6_q8ulq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vuvf0"]
 shader = ExtResource("5_nv8p6")
@@ -30,10 +31,10 @@ box_scene = ExtResource("2_408v8")
 coin_scene = ExtResource("3_l16fi")
 skull_scene = ExtResource("4_igqhe")
 
-[node name="CanvasGroup" type="CanvasGroup" parent="."]
+[node name="Background" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_vuvf0")
 
-[node name="top" type="ColorRect" parent="CanvasGroup"]
+[node name="top" type="ColorRect" parent="Background"]
 offset_left = -20.0
 offset_top = -12.0
 offset_right = 1179.0
@@ -41,7 +42,7 @@ offset_bottom = 562.0
 color = Color(0.024357, 1.75888e-05, 0.123784, 1)
 metadata/_edit_lock_ = true
 
-[node name="bottom" type="ColorRect" parent="CanvasGroup"]
+[node name="bottom" type="ColorRect" parent="Background"]
 offset_left = -8.0
 offset_top = 562.0
 offset_right = 1170.0
@@ -49,7 +50,7 @@ offset_bottom = 670.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="mid" type="ColorRect" parent="CanvasGroup"]
+[node name="floor" type="ColorRect" parent="Background"]
 offset_left = -13.0
 offset_top = 559.0
 offset_right = 1152.0
@@ -83,6 +84,9 @@ scale = Vector2(60, 35)
 shape = SubResource("RectangleShape2D_b2m7l")
 action = "jump"
 
+[node name="PlayerHud" parent="." instance=ExtResource("6_q8ulq")]
+
 [connection signal="timeout" from="CoinTimer" to="." method="_on_coin_timer_timeout"]
 [connection signal="timeout" from="BoxTimer" to="." method="_on_box_timer_timeout"]
 [connection signal="timeout" from="SkullTimer" to="." method="_on_skull_timer_timeout"]
+[connection signal="hit" from="PlayerHud" to="." method="_on_player_hit"]

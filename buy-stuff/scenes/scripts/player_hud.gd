@@ -23,18 +23,12 @@ func _on_player_coin() -> void:
 	
 
 func _on_player_hit() -> void:
-	$HUD/DeadTimer.start()
-	$HUD/Dead.show()
 	combo = 0
 	hit.emit()
 	
-func _on_hud_dead_timer_timeout() -> void:
-	$HUD/Dead.hide()
-
 
 func change_combo_label(combo_text: String, text_size:int):
 	$ComboLabel.text = combo_text
-	#$ComboLabel.size = text_size
 	$ComboLabel.show()
 	$ComboDisplayTimer.start()
 
@@ -67,7 +61,6 @@ func combo_meter():
 		combo = 1
 	$ComboTimer.start()
 	
-	
 func _on_combo_display_timer_timeout() -> void:
 	$ComboLabel.hide()
 
@@ -93,3 +86,8 @@ func _on_player_show_hover_stall_timer() -> void:
 	new_hover_loader.loader_size = hover_bar_width
 	$HoverProgress.add_child(new_hover_loader)
 	
+
+func set_player(x,y, original_y=0):
+	# original_y sets the absolute floor for the player in the map
+	$Player.original_y = original_y
+	$Player.position = Vector2(x,y)

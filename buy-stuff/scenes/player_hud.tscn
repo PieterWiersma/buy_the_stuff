@@ -66,7 +66,6 @@ offset_right = 1119.0
 offset_bottom = 628.0
 color = Color(1, 0.054902, 1, 1)
 
-[connection signal="dead_timer_timeout" from="HUD" to="." method="_on_hud_dead_timer_timeout"]
 [connection signal="coin" from="Player" to="." method="_on_player_coin"]
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="hover" from="Player" to="." method="_on_player_hover"]

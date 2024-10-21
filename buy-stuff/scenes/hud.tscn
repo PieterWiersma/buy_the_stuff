@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcubjan6ka22e"]
+[gd_scene load_steps=4 format=3 uid="uid://bcubjan6ka22e"]
 
 [ext_resource type="Script" path="res://scenes/scripts/hud.gd" id="1_f1751"]
 [ext_resource type="Shader" path="res://shaders/VHSPause.gdshader" id="2_gfb33"]
@@ -9,10 +9,6 @@ shader_parameter/shake_amount_x = 500.0
 shader_parameter/shake_amount_y = 5.811
 shader_parameter/white_hlines = 26.654
 shader_parameter/white_vlines = 67.237
-
-[sub_resource type="SystemFont" id="SystemFont_vgmbj"]
-font_names = PackedStringArray("Fantasy")
-subpixel_positioning = 0
 
 [node name="HUD" type="Node2D"]
 script = ExtResource("1_f1751")
@@ -34,24 +30,12 @@ text = "vx`vsasa
 [node name="Dead" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_wtw0w")
 
-[node name="Dead" type="Label" parent="Dead"]
-offset_left = 148.0
-offset_top = 115.0
-offset_right = 1028.0
-offset_bottom = 552.0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_vgmbj")
-theme_override_font_sizes/font_size = 283
-text = "DEAD"
-
-[node name="ColorRect" type="ColorRect" parent="Dead/Dead"]
-show_behind_parent = true
-layout_mode = 0
-offset_left = -153.0
-offset_top = -151.0
-offset_right = 1031.0
-offset_bottom = 528.0
-color = Color(0.290196, 0.0627451, 0.0627451, 1)
+[node name="Dead" type="ColorRect" parent="Dead"]
+offset_left = -1.0
+offset_top = -3.0
+offset_right = 1172.0
+offset_bottom = 665.0
+tooltip_text = "fdsfdsfdsfdsfdsfsfdsfdsfds"
+color = Color(0.116741, 0.116741, 0.116741, 1)
 
 [connection signal="timeout" from="DeadTimer" to="." method="_on_dead_timer_timeout"]
-[connection signal="focus_entered" from="Dead/Dead" to="Dead" method="_on_dead_focus_entered"]

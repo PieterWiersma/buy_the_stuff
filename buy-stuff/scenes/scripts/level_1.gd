@@ -4,12 +4,16 @@ extends Node
 @export var coin_scene: PackedScene
 @export var skull_scene: PackedScene
 
-signal coin_collected
+signal player_died
 
 var increment: float = 0.001
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$PlayerHud.hide_ui()
+	$PlayerHud/Player.die()
+	
+	# Make a background
 	for i in 400:
 		var star = Star.new()
 		star.size = Vector2(randf() * 3,randf() * 3,)
@@ -17,6 +21,10 @@ func _ready() -> void:
 		star.position.x = randf() * 1100
 		add_child(star)
 
+	# Place the player x,y, original_y
+	$PlayerHud.set_player(120,10,
+		1 + $Background/floor.position.y - $PlayerHud/Player.SIZE_Y/2
+		)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -68,6 +76,16 @@ func _on_skull_timer_timeout():
 	# Spawn the mob by adding it to the Main scene.
 	add_child(skull)
 
+
+func _on_player_hit():
+	$PlayerHud/Player.die()
+	$PlayerHud.hide_ui()
+	$PlayerHud/HUD.on_player_hit()
+	player_died.emit()
+
+
 func start_level() -> void:
 	get_tree().call_group("lvl_object", "queue_free")
 	$SkullTimer.wait_time = 3
+	$PlayerHud/Player.start()
+	$PlayerHud.show_ui()

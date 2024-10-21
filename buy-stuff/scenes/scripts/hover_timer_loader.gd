@@ -13,7 +13,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	stretch_loader(delta)
-	print('hovertime Loader is here: ')
 	if size.x >= loader_size:
 		self.queue_free()
 
