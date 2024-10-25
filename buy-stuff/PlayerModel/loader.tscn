@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsrof0qm15bef"]
+
+[ext_resource type="Script" path="res://PlayerModel/loader.gd" id="1_2wb4y"]
+
+[node name="Loader" type="Node2D"]
+position = Vector2(100, 100)
+rotation = 1.22173
+script = ExtResource("1_2wb4y")
+
+[node name="Pointer" type="ColorRect" parent="."]
+visible = false
+offset_left = 9.5
+offset_top = 10.0
+offset_right = 10.5
+offset_bottom = 20.0
+rotation = 1.5708
+pivot_offset = Vector2(0.5, 0)
+color = Color(0, 0, 0, 1)
+
+[node name="Filler" type="Line2D" parent="."]
+position = Vector2(10.5, 10)
+rotation = 3.14159
+default_color = Color(0.341914, 0.126222, 0.516233, 1)
+
+[node name="KillTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="KillTimer" to="." method="_kill"]

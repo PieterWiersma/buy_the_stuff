@@ -22,7 +22,7 @@ func _ready() -> void:
 		add_child(star)
 
 	# Place the player x,y, original_y
-	$PlayerHud.set_player(120,10,
+	$PlayerHud.set_player(120,50,
 		1 + $Background/floor.position.y - $PlayerHud/Player.SIZE_Y/2
 		)
 

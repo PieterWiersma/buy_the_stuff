@@ -16,6 +16,8 @@ var SIZE_X = 40
 var SIZE_JUMP_Y_INCREMENT = 1
 var SIZE_JUMP_Y = 20
 var ORIGINAL_COLOR = "#ab0000"
+
+# argument variables
 var original_y: float 
 
 # Coins, health, that stuff
@@ -27,20 +29,26 @@ var hover_stall_value: float = 0.5
 var hover_allowed: bool = true
 
 # jumping variables
-var is_jumping: bool = false
 var jump_height: int = 50
 var gravity_modifier: float = 1.3
 var jump_speed: float = 0
 var max_jumps: int = 2
-var fuck_gravity: bool = false
 
-# process
+# process variables
+var fuck_gravity: bool = false
+var is_jumping: bool = false
 var jump_intensity: float
 var n_jumps: int = 0
 
+
+var cumdelta: float = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	# assuming this loads before the scenes replace it
+	# for testing purposes only
+	self.position = Vector2(500, 100)
+	self.original_y = 500
 	
 	
 # Called every frame 'delta' is the elapsed time since the previous frame.
@@ -49,6 +57,7 @@ func _process(delta: float) -> void:
 	if $PlayerColor.size.y < SIZE_Y:
 			$PlayerColor.size.y += SIZE_JUMP_Y_INCREMENT
 	
+
 	
 func check_jump(delta: float):
 	var time = 0
@@ -78,11 +87,16 @@ func disallow_hover():
 	$HoverTimer/HoverAllowed.start()
 	hover_allowed = false
 
+func hover_animation():	
+	$TrailSpawner.set_process(true)
+	$TrailSpawner/TrailTimer.start()
+
 func go_hover():
 	if not hover_allowed:
 		return
 		
 	hover.emit()
+	hover_animation()
 	if $HoverTimer.time_left > 0:
 		jump_intensity = 0
 		fuck_gravity = true

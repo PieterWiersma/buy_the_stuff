@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d03a1olx2ffqe"]
+[gd_scene load_steps=10 format=3 uid="uid://d03a1olx2ffqe"]
 
 [ext_resource type="Script" path="res://scenes/scripts/player.gd" id="1_34y3g"]
 [ext_resource type="Script" path="res://scenes/scripts/player_color.gd" id="1_ey7ef"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/scripts/jump_color.gd" id="3_iexix"]
 [ext_resource type="Texture2D" uid="uid://difi524jggj23" path="res://light.png" id="4_5ocsj"]
 [ext_resource type="Script" path="res://scenes/scripts/player_hover_timer.gd" id="4_j0ulh"]
+[ext_resource type="Script" path="res://scenes/scripts/trail_spawner.gd" id="7_ytt8a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r28wl"]
 size = Vector2(38, 39)
@@ -23,10 +24,19 @@ collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_34y3g")
 
+[node name="TrailSpawner" type="Marker2D" parent="."]
+position = Vector2(-20, -20)
+script = ExtResource("7_ytt8a")
+
+[node name="TrailTimer" type="Timer" parent="TrailSpawner"]
+wait_time = 0.142
+one_shot = true
+
 [node name="PlayerCollision" type="CollisionShape2D" parent="." groups=["player"]]
 shape = SubResource("RectangleShape2D_r28wl")
 
 [node name="PlayerColor" type="ColorRect" parent="." groups=["player"]]
+show_behind_parent = true
 material = SubResource("ShaderMaterial_6prsd")
 use_parent_material = true
 anchors_preset = 8
@@ -89,6 +99,7 @@ texture_scale = 1.84
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="hover" from="." to="HoverTimer" method="_on_player_hover"]
 [connection signal="hover_stop" from="." to="HoverTimer" method="_on_player_hover_stop"]
+[connection signal="timeout" from="TrailSpawner/TrailTimer" to="TrailSpawner" method="_on_trail_timer_timeout"]
 [connection signal="show_hover_stall_timer" from="HoverTimer" to="." method="_on_hover_timer_show_hover_stall_timer"]
 [connection signal="timeout" from="HoverTimer/HoverTimerStall" to="HoverTimer" method="_on_hover_timer_stall_timeout"]
 [connection signal="timeout" from="HoverTimer/HoverAllowed" to="." method="_on_hover_allowed_timeout"]
