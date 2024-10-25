@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Area2D
 
 class_name Coin
 
@@ -29,3 +29,9 @@ func go_explode() -> void:
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
+
+
+func _on_body_entered(body: Node2D) -> void:
+	go_explode() # Replace with function body.
+	if body.name == "Player":
+		body.coins += 1

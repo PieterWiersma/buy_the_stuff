@@ -3,15 +3,16 @@ extends Node
 @export var box_scene: PackedScene
 @export var coin_scene: PackedScene
 @export var skull_scene: PackedScene
+@export var platform_scene: PackedScene
 
-signal player_died
+signal sgnl_player_died(player: Player)
 
 var increment: float = 0.001
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$PlayerHud.hide_ui()
-	$PlayerHud/Player.die()
+	if not get_parent().name == 'root':
+		$Player.die()
 	
 	# Make a background
 	for i in 400:
@@ -22,9 +23,7 @@ func _ready() -> void:
 		add_child(star)
 
 	# Place the player x,y, original_y
-	$PlayerHud.set_player(120,50,
-		1 + $Background/floor.position.y - $PlayerHud/Player.SIZE_Y/2
-		)
+	$Player.position  = Vector2(120,50)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -77,15 +76,26 @@ func _on_skull_timer_timeout():
 	add_child(skull)
 
 
-func _on_player_hit():
-	$PlayerHud/Player.die()
-	$PlayerHud.hide_ui()
-	$PlayerHud/HUD.on_player_hit()
-	player_died.emit()
+func _on_platform_timer_timeout() -> void:
+		# Create a new instance of the Mob scene.
+	var platform = platform_scene.instantiate()
+
+	# Choose a random location on Path2D.
+	var platform_spawn_location = $BoxPath/PathFollow2D
+	platform_spawn_location.progress_ratio = randf()
+	
+	# Set the mob's position to a random location.
+	platform.position = platform_spawn_location.position
+
+	# Spawn the mob by adding it to the Main scene.
+	add_child(platform)
 
 
 func start_level() -> void:
 	get_tree().call_group("lvl_object", "queue_free")
 	$SkullTimer.wait_time = 3
-	$PlayerHud/Player.start()
-	$PlayerHud.show_ui()
+	$Player.start(120,10)
+
+
+func _on_player_sgnl_player_died(player: Player) -> void:
+	sgnl_player_died.emit(player)

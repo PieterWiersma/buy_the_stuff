@@ -1,11 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8we5xh6j8dc7"]
+[gd_scene load_steps=13 format=3 uid="uid://c8we5xh6j8dc7"]
 
 [ext_resource type="Script" path="res://scenes/scripts/level_1.gd" id="1_y5oao"]
 [ext_resource type="PackedScene" uid="uid://d0qn4n25hjihd" path="res://scenes/box.tscn" id="2_408v8"]
 [ext_resource type="PackedScene" uid="uid://blw54ox33juq" path="res://scenes/coin.tscn" id="3_l16fi"]
+[ext_resource type="PackedScene" uid="uid://5d0myasppyb8" path="res://LevelBlocks/gravity.tscn" id="4_5jwiw"]
 [ext_resource type="PackedScene" uid="uid://d2o56q43c2fa7" path="res://scenes/skull.tscn" id="4_igqhe"]
+[ext_resource type="PackedScene" uid="uid://ds25ca0fs84f" path="res://LevelBlocks/platform.tscn" id="5_8o2sf"]
 [ext_resource type="Shader" path="res://shaders/TV.gdshader" id="5_nv8p6"]
-[ext_resource type="PackedScene" uid="uid://cj1wfbykg7nbg" path="res://scenes/player_hud.tscn" id="6_q8ulq"]
+[ext_resource type="PackedScene" uid="uid://dg8yhobkc2qwa" path="res://PlayerModel/player.tscn" id="6_tqfos"]
+[ext_resource type="PackedScene" uid="uid://d0t01hf3v82x6" path="res://scenes/floor.tscn" id="6_vcof6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vuvf0"]
 shader = ExtResource("5_nv8p6")
@@ -30,9 +33,18 @@ script = ExtResource("1_y5oao")
 box_scene = ExtResource("2_408v8")
 coin_scene = ExtResource("3_l16fi")
 skull_scene = ExtResource("4_igqhe")
+platform_scene = ExtResource("5_8o2sf")
 
 [node name="Background" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_vuvf0")
+
+[node name="Floor" parent="Background" instance=ExtResource("6_vcof6")]
+position = Vector2(-3, 559)
+metadata/_edit_lock_ = true
+
+[node name="roof" parent="Background" instance=ExtResource("6_vcof6")]
+position = Vector2(-3, 0)
+metadata/_edit_lock_ = true
 
 [node name="top" type="ColorRect" parent="Background"]
 offset_left = -20.0
@@ -62,6 +74,10 @@ metadata/_edit_lock_ = true
 wait_time = 1.05
 autostart = true
 
+[node name="PlatformTimer" type="Timer" parent="." groups=["box", "lvl_object"]]
+wait_time = 5.801
+autostart = true
+
 [node name="BoxTimer" type="Timer" parent="."]
 wait_time = 1.407
 autostart = true
@@ -84,9 +100,15 @@ scale = Vector2(60, 35)
 shape = SubResource("RectangleShape2D_b2m7l")
 action = "jump"
 
-[node name="PlayerHud" parent="." instance=ExtResource("6_q8ulq")]
+[node name="Player" parent="." instance=ExtResource("6_tqfos")]
+position = Vector2(79, 69)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Gravity" parent="." instance=ExtResource("4_5jwiw")]
 
 [connection signal="timeout" from="CoinTimer" to="." method="_on_coin_timer_timeout"]
+[connection signal="timeout" from="PlatformTimer" to="." method="_on_platform_timer_timeout"]
 [connection signal="timeout" from="BoxTimer" to="." method="_on_box_timer_timeout"]
 [connection signal="timeout" from="SkullTimer" to="." method="_on_skull_timer_timeout"]
-[connection signal="hit" from="PlayerHud" to="." method="_on_player_hit"]
+[connection signal="sgnl_player_died" from="Player" to="." method="_on_player_sgnl_player_died"]

@@ -3,7 +3,6 @@ extends Node
 
 var player_settings: PlayerSettings = PlayerSettings.new()
 
-@export var jump_effect: PackedScene 
 @export var hover_effect: PackedScene
 
 
@@ -24,11 +23,14 @@ func set_animation(player: Player, animation: String):
 		
 	var new_animation
 	if animation == 'hover':
-		new_animation = hover_effect.instantiate()
 		player.color_rect.hide()
+		
+		new_animation = hover_effect.instantiate()
 		new_animation.player = player
 		self.add_child(new_animation)
 	else:
+		player.color_rect.show()
+		
 		new_animation = PlayerAnimationWalk.new()
 		new_animation.player = player
 		new_animation.rotation_speed = player_settings.ROTATION_SPEED

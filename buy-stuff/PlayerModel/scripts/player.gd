@@ -4,6 +4,8 @@ extends CharacterBody2D
 
 class_name Player
 
+signal sgnl_player_died(player: Player)
+
 var game_settings: GameSettings = GameSettings.new()
 var player_settings: PlayerSettings = PlayerSettings.new()
 
@@ -24,6 +26,7 @@ var max_hover: float = 1.0
 
 # variables for internal process
 var n_jumps: int = 0
+var is_dead: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -35,6 +38,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Handle inputs
+	#print("player: " + str(self.global_position))
 	# jump actions
 	if Input.is_action_just_pressed('jump'):
 		$Jump.jump(self, jump_speed)
@@ -58,6 +62,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	# This handles the player movement, though actual inputs are
 	# handled in respective 'modules'
+	self.velocity.x = 0
 	
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
@@ -70,3 +75,20 @@ func _physics_process(delta: float) -> void:
 			# without removing the option to jump
 			if self.velocity.y > 0:
 				self.velocity.y -= abs(self.velocity.y)
+
+func unhover():
+	$Jump.unhover(self)
+
+func die():
+	print('s')
+	if not is_dead:
+		sgnl_player_died.emit(self)
+		self.hide()
+		is_dead = true
+
+
+func start(x: float, y: float):
+	if is_dead:
+		self.show()
+		self.position = Vector2(x,y)
+		is_dead = false

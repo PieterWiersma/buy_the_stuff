@@ -1,4 +1,4 @@
-extends ColorRect
+extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -8,7 +8,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if self.size.y > 20:
-		self.size.y -= 1
-	if self.size.x > 20:
-		self.size.x -= 1
+	pass
+
+
+#func _on_box_body_entered(body: Node2D) -> void:
+	#print('fdsfds')
+	#pass # Replace with function body.

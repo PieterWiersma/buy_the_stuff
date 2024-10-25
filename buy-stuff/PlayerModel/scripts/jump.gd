@@ -42,19 +42,7 @@ func _hover_start(player: Player):
 		new_loader.size = Vector2(2,2)
 		
 		add_child(new_loader)
-		
-
-func unhover(player: Player):
-	if just_hovered:
-		if get_child(-1).name == 'Loader':
-			get_child(-1).queue_free()
-		$HoverTimerReset.start()
-		just_hovered = false
-		
-	player.add_to_group(game_settings.GRAVITY_GROUP)
-	player.jump_allowed = true
-
-
+	
 
 func _on_jump_timer_timeout() -> void:
 	if player.max_jumps > player.n_jumps:
@@ -66,3 +54,15 @@ func _on_jump_timer_timeout() -> void:
 func _on_hover_timer_timeout() -> void:
 	player.animations.set_animation(player, 'walk')
 	unhover(player) # Player should exist at this point
+	
+
+func unhover(player: Player):
+	if just_hovered:
+		if get_child(-1).name == 'Loader':
+			get_child(-1).queue_free()
+		$HoverTimerReset.start()
+		just_hovered = false
+		
+	player.add_to_group(game_settings.GRAVITY_GROUP)
+	player.jump_allowed = true
+	player.animations.set_animation(player, 'walk')

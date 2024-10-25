@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bsrof0qm15bef"]
 
-[ext_resource type="Script" path="res://PlayerModel/loader.gd" id="1_2wb4y"]
+[ext_resource type="Script" path="res://PlayerModel/scripts/loader.gd" id="1_2wb4y"]
 
 [node name="Loader" type="Node2D"]
 position = Vector2(100, 100)

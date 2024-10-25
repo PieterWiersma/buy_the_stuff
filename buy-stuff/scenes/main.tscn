@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8we5xh6j8dc7" path="res://scenes/level_1.tscn" id="4_hf5vf"]
 [ext_resource type="AudioStream" uid="uid://ce6tmwe4ijg8o" path="res://sapcelords.mp3" id="6_2rk7k"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" groups=["box"]]
 script = ExtResource("1_bk7ta")
 
 [node name="Level" parent="." instance=ExtResource("4_hf5vf")]
@@ -21,7 +21,7 @@ stream = ExtResource("6_2rk7k")
 autoplay = true
 parameters/looping = true
 
-[connection signal="player_died" from="Level" to="." method="_on_player_die"]
+[connection signal="sgnl_player_died" from="Level" to="." method="_on_level_sgnl_player_died"]
 [connection signal="buy_hover" from="Shop" to="." method="_on_shop_buy_hover"]
 [connection signal="buy_jumps" from="Shop" to="." method="_on_shop_buy_jumps"]
 [connection signal="exit_shop" from="Shop" to="." method="_on_exit_shop"]

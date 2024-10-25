@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddok0k31c7yu1"]
+
+[ext_resource type="PackedScene" uid="uid://d0t01hf3v82x6" path="res://scenes/floor.tscn" id="1_l1x3g"]
+[ext_resource type="Script" path="res://test.gd" id="1_w0fr1"]
+[ext_resource type="PackedScene" uid="uid://dg8yhobkc2qwa" path="res://PlayerModel/player.tscn" id="2_eppdl"]
+[ext_resource type="PackedScene" uid="uid://ds25ca0fs84f" path="res://LevelBlocks/platform.tscn" id="4_gatn3"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_w0fr1")
+
+[node name="Floor" parent="." instance=ExtResource("1_l1x3g")]
+position = Vector2(5, 14)
+
+[node name="Player" parent="." instance=ExtResource("2_eppdl")]
+position = Vector2(199, 579)
+collision_layer = 513
+collision_mask = 257
+
+[node name="Platform" parent="." instance=ExtResource("4_gatn3")]
+position = Vector2(1167, 463)
