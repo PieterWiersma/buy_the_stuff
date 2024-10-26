@@ -9,6 +9,9 @@ signal sgnl_player_died(player: Player)
 var game_settings: GameSettings = GameSettings.new()
 var player_settings: PlayerSettings = PlayerSettings.new()
 
+# Variables others to set
+var level_position: Vector2 = Vector2(250,20)
+
 # Variables for others to interact with
 var jump_speed: int = player_settings.JUMP_SPEED
 var size: Vector2 
@@ -38,7 +41,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Handle inputs
-	#print("player: " + str(self.global_position))
+
 	# jump actions
 	if Input.is_action_just_pressed('jump'):
 		$Jump.jump(self, jump_speed)
@@ -54,16 +57,23 @@ func _process(delta: float) -> void:
 		self.velocity.x += 10
 		
 		
-	# Keep player on 75% of the screen // because boost
-	if self.position.x > game_settings.WINDOWS_SIZE * 0.75:
-		self.velocity.x = 0		
+
 	
 
 func _physics_process(delta: float) -> void:
 	# This handles the player movement, though actual inputs are
 	# handled in respective 'modules'
-	self.velocity.x = 0
 	
+	# Keep player on 50% of the screen
+	if self.position.x > game_settings.WINDOWS_SIZE * 0.50:
+		self.velocity.x = -10
+	elif self.position.x < self.level_position[0]-50:
+		self.velocity.x = 10
+		print('fdsfs')
+	elif self.position.x > self.level_position[0]:
+		self.velocity.x -= 200 * delta
+
+		
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
 		# Standard behaviour when approaching a floor
@@ -90,5 +100,5 @@ func die():
 func start(x: float, y: float):
 	if is_dead:
 		self.show()
-		self.position = Vector2(x,y)
+		self.position = self.level_position
 		is_dead = false

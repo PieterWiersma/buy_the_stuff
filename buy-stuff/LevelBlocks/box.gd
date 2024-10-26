@@ -25,9 +25,9 @@ func go_explode() -> void:
 	# TODO add timer and animation
 	queue_free() 
 	
-
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == 'Player':
-		body.velocity.y = -500
+		body.velocity.y -= 500
+		print('fdfs')
 		body.unhover()
 		self.queue_free()

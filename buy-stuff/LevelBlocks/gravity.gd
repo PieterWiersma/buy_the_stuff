@@ -13,8 +13,9 @@ func _physics_process(delta: float) -> void:
 	for entity in get_tree().get_nodes_in_group("gravity_affected"):
 		if 'floored' in entity:
 			if entity.floored:
+				# TODO fix this // or remove ceilings metatag?
 				entity.velocity.y = 0
-				return
+				continue
 				
 		var new_velocity = entity.velocity.y + (downforce_increment * delta)
 		new_velocity = clamp(new_velocity, MAX_LIFT, MAX_DOWNFORCE)
