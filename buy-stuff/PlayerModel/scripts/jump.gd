@@ -9,7 +9,6 @@ var player: Player
 
 # internals
 var just_hovered: bool = false
-var new_loader: Loader
 
 func jump(player_arg: Player, jump_speed_arg: int):
 	# TODO
@@ -21,10 +20,10 @@ func jump(player_arg: Player, jump_speed_arg: int):
 	else:
 		print('stop')
 		$InputDelay.stop()
-		_hover_start(player)
+		_hover_start()
 
 
-func _hover_start(player: Player):
+func _hover_start():
 	if $HoverTimerReset.is_stopped():
 		just_hovered = true
 		
@@ -53,10 +52,10 @@ func _on_jump_timer_timeout() -> void:
 
 func _on_hover_timer_timeout() -> void:
 	player.animations.set_animation(player, 'walk')
-	unhover(player) # Player should exist at this point
+	unhover() # Player should exist at this point
 	
 
-func unhover(player: Player):
+func unhover():
 	if just_hovered:
 		if get_child(-1).name == 'Loader':
 			get_child(-1).queue_free()

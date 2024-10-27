@@ -35,7 +35,7 @@ func _on_exit_shop():
 	$Menu.show()
 	apply_player_stats()
 
-func _on_level_sgnl_player_died(player: Player) -> void:
+func _on_level_sgnl_player_died() -> void:
 	get_player_stats()
 	$Menu.show()
 

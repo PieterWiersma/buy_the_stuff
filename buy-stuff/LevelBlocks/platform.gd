@@ -9,7 +9,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position.x -=  increment * delta
-	print(position)
 	
 	
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:

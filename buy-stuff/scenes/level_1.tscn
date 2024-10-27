@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ds25ca0fs84f" path="res://LevelBlocks/platform.tscn" id="5_8o2sf"]
 [ext_resource type="Shader" path="res://shaders/TV.gdshader" id="5_nv8p6"]
 [ext_resource type="PackedScene" uid="uid://dg8yhobkc2qwa" path="res://PlayerModel/player.tscn" id="6_tqfos"]
-[ext_resource type="PackedScene" uid="uid://d0t01hf3v82x6" path="res://LevelBlocks/floor (2).tscn" id="6_vcof6"]
+[ext_resource type="PackedScene" uid="uid://ocryeli0i7dx" path="res://LevelBlocks/floor.tscn" id="6_vcof6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vuvf0"]
 shader = ExtResource("5_nv8p6")
@@ -39,11 +39,13 @@ platform_scene = ExtResource("5_8o2sf")
 material = SubResource("ShaderMaterial_vuvf0")
 
 [node name="Floor" parent="Background" instance=ExtResource("6_vcof6")]
+visible = false
 position = Vector2(-3, 559)
-metadata/_edit_lock_ = true
 
-[node name="roof" parent="Background" instance=ExtResource("6_vcof6")]
+[node name="Roof" parent="Background" instance=ExtResource("6_vcof6")]
+visible = false
 position = Vector2(-3, 0)
+velocity_change = 100
 metadata/_edit_lock_ = true
 
 [node name="top" type="ColorRect" parent="Background"]
@@ -95,13 +97,14 @@ curve = SubResource("Curve2D_ob63d")
 position = Vector2(1142, 540.094)
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+visible = false
 position = Vector2(600, 300)
 scale = Vector2(60, 35)
 shape = SubResource("RectangleShape2D_b2m7l")
 action = "jump"
 
 [node name="Player" parent="." instance=ExtResource("6_tqfos")]
-position = Vector2(79, 69)
+position = Vector2(177, 69)
 collision_layer = 3
 collision_mask = 3
 

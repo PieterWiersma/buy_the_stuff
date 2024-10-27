@@ -10,7 +10,7 @@ var game_settings: GameSettings = GameSettings.new()
 var player_settings: PlayerSettings = PlayerSettings.new()
 
 # Variables others to set
-var level_position: Vector2 = Vector2(250,20)
+var level_position: Vector2
 
 # Variables for others to interact with
 var jump_speed: int = player_settings.JUMP_SPEED
@@ -24,7 +24,7 @@ var jump_allowed: bool = true
 
 # Variables for player progress
 var coins: int = 10
-var max_jumps: int = 2
+var max_jumps: int = 20
 var max_hover: float = 1.0
 
 # variables for internal process
@@ -47,17 +47,14 @@ func _process(delta: float) -> void:
 		$Jump.jump(self, jump_speed)
 		$Animations.do_effect(self, 'jump')
 		
-
 	if Input.is_action_just_released("jump"):
-		$Jump.unhover(self)
+		$Jump.unhover()
 		$Animations.set_animation(self, 'walk')
 		
 	# It can get stuck if not forced here
 	if Input.is_action_pressed("boost"):
 		self.velocity.x += 10
 		
-		
-
 	
 
 func _physics_process(delta: float) -> void:
@@ -69,14 +66,16 @@ func _physics_process(delta: float) -> void:
 		self.velocity.x = -10
 	elif self.position.x < self.level_position[0]-50:
 		self.velocity.x = 10
-		print('fdsfs')
 	elif self.position.x > self.level_position[0]:
 		self.velocity.x -= 200 * delta
 
-		
+
+	# Handle interactions
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
-		# Standard behaviour when approaching a floor
+		if collision_info.get_collider().get('velocity_change'):
+			self.velocity.y += collision_info.get_collider().get('velocity_change')
+		# Standard behaviour when ap proaching a floor
 		if collision_info.get_collider().get_meta('is_floor', true):
 			# If we land, we're allowed to jump again
 			self.n_jumps = 0
@@ -84,20 +83,21 @@ func _physics_process(delta: float) -> void:
 			# this will always compensate for the increase in velocity
 			# without removing the option to jump
 			if self.velocity.y > 0:
-				self.velocity.y -= abs(self.velocity.y)
+				self.velocity.y += -abs(self.velocity.y)
+
 
 func unhover():
-	$Jump.unhover(self)
+	$Jump.unhover()
 
 func die():
-	print('s')
 	if not is_dead:
 		sgnl_player_died.emit(self)
 		self.hide()
 		is_dead = true
 
 
-func start(x: float, y: float):
+func start(x:int, y:int):
+	self.level_position = Vector2(x, y)
 	if is_dead:
 		self.show()
 		self.position = self.level_position

@@ -9,7 +9,7 @@ func _ready() -> void:
 	increment = (randf() * 2) + 3
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	position.x -=  increment 
 	$CollisionShape2D.position.x -= increment
 	$ColorRect.position.x -= increment

@@ -26,7 +26,7 @@ func _ready() -> void:
 	$Player.position  = Vector2(120,50)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if $SkullTimer.wait_time > 0.5:
 		$SkullTimer.wait_time -= increment
 
