@@ -1,14 +1,17 @@
-extends ColorRect
+extends Node2D
 
+var x = TestRect.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	pass
+	$Timer.start()
+	add_child(x)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if self.size.y > 20:
-		self.size.y -= 1
-	if self.size.x > 20:
-		self.size.x -= 1
+	print('main')
+
+func _on_timer_timeout() -> void:
+	x.queue_free()

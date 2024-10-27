@@ -10,7 +10,7 @@ func _ready() -> void:
 	speed = randf() * 0.005
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# pulsating
 	increment = fmod(increment, 1) + speed
 	self.color.a = increment

@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://ds25ca0fs84f"]
+
+[ext_resource type="Shader" path="res://shaders/retro_glow.gdshader" id="1_27ow7"]
+[ext_resource type="Script" path="res://LevelBlocks/platform.gd" id="1_avaoo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_76x8x"]
+shader = ExtResource("1_27ow7")
+shader_parameter/rect_size = Vector2(0.45, 0.1)
+shader_parameter/bness = 1.0
+shader_parameter/fall_off_scale = 3.0
+shader_parameter/b_offset = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvoeb"]
+size = Vector2(1153, 40.5)
+
+[node name="Platform" type="StaticBody2D" groups=["lvl_object"]]
+position = Vector2(5, 264)
+script = ExtResource("1_avaoo")
+metadata/is_floor = true
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_76x8x")
+offset_left = -5.0
+offset_top = -26.0
+offset_right = 1144.0
+offset_bottom = 35.0
+color = Color(1, 1, 0.32549, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(571.5, 5.75)
+shape = SubResource("RectangleShape2D_lvoeb")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(587, 7.5)
+scale = Vector2(79.3, 1.75)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

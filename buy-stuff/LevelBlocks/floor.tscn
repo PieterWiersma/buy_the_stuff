@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://ocryeli0i7dx"]
+
+[ext_resource type="Shader" path="res://shaders/retro_glow.gdshader" id="1_8va0g"]
+[ext_resource type="Script" path="res://LevelBlocks/floor.gd" id="1_qnxek"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_76x8x"]
+shader = ExtResource("1_8va0g")
+shader_parameter/rect_size = Vector2(0.45, 0.1)
+shader_parameter/bness = 1.0
+shader_parameter/fall_off_scale = 3.0
+shader_parameter/b_offset = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvoeb"]
+size = Vector2(1153, 40.5)
+
+[node name="Floor" type="StaticBody2D"]
+position = Vector2(-5, 15)
+script = ExtResource("1_qnxek")
+metadata/is_floor = true
+metadata/_edit_group_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_76x8x")
+offset_left = 6.0
+offset_top = -26.0
+offset_right = 1155.0
+offset_bottom = 35.0
+color = Color(1, 1, 0.32549, 1)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(582.5, 5.75)
+shape = SubResource("RectangleShape2D_lvoeb")

@@ -1,16 +1,14 @@
-extends Node2D
+extends Node
 
+var children
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	children = get_children()
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-
-
-#func _on_box_body_entered(body: Node2D) -> void:
-	#print('fdsfds')
-	#pass # Replace with function body.
+	for child in children:
+		child.position.x -= 250 * delta

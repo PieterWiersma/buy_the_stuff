@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://ulu8st6afybs"]
+
+[ext_resource type="Script" path="res://trail_rect.gd" id="1_kmnhe"]
+
+[node name="TrailRect" type="ColorRect"]
+offset_left = -20.0
+offset_top = -21.0
+offset_right = 20.0
+offset_bottom = 19.0
+pivot_offset = Vector2(20, 20)
+color = Color(0.627451, 0.270588, 0.12549, 1)
+script = ExtResource("1_kmnhe")
