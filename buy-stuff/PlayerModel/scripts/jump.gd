@@ -14,6 +14,7 @@ func jump(player_arg: Player, jump_speed_arg: int):
 	# TODO
 	player = player_arg
 	jump_speed = jump_speed_arg
+	player.floored = false
 	if $InputDelay.is_stopped():
 		print('start')
 		$InputDelay.start()
@@ -44,13 +45,15 @@ func _hover_start():
 
 func _on_jump_timer_timeout() -> void:
 	if player.max_jumps > player.n_jumps:
+		# add to jumps, remove floored status, jump
 		player.n_jumps += 1
 		player.velocity.y = -jump_speed 
+		
+		# Create animation
 		var jump_spawn = JumpSpawn.new()
 		jump_spawn.player = player
 		self.add_child(jump_spawn)
 		
-
 
 func _on_hover_timer_timeout() -> void:
 	player.animations.set_animation(player, 'walk')

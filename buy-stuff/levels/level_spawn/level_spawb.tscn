@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8we5xh6j8dc7"]
+[gd_scene load_steps=14 format=3 uid="uid://c8we5xh6j8dc7"]
 
-[ext_resource type="Script" path="res://scenes/scripts/level_test.gd" id="1_y5oao"]
+[ext_resource type="Script" path="res://levels/level_spawn/level_test.gd" id="1_y5oao"]
 [ext_resource type="PackedScene" uid="uid://d0qn4n25hjihd" path="res://LevelBlocks/jumpbox.tscn" id="2_408v8"]
 [ext_resource type="PackedScene" uid="uid://blw54ox33juq" path="res://LevelBlocks/coin.tscn" id="3_l16fi"]
 [ext_resource type="PackedScene" uid="uid://5d0myasppyb8" path="res://LevelBlocks/gravity.tscn" id="4_5jwiw"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" path="res://shaders/TV.gdshader" id="5_nv8p6"]
 [ext_resource type="PackedScene" uid="uid://dg8yhobkc2qwa" path="res://PlayerModel/player.tscn" id="6_tqfos"]
 [ext_resource type="PackedScene" uid="uid://ocryeli0i7dx" path="res://LevelBlocks/floor.tscn" id="6_vcof6"]
+[ext_resource type="AudioStream" uid="uid://ce6tmwe4ijg8o" path="res://sapcelords.mp3" id="10_3gjsb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vuvf0"]
 shader = ExtResource("5_nv8p6")
@@ -46,6 +47,7 @@ position = Vector2(-3, 559)
 visible = false
 position = Vector2(-3, 0)
 velocity_change = 100
+is_floor = false
 metadata/_edit_lock_ = true
 
 [node name="top" type="ColorRect" parent="Background"]
@@ -109,6 +111,11 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="Gravity" parent="." instance=ExtResource("4_5jwiw")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_3gjsb")
+autoplay = true
+parameters/looping = true
 
 [connection signal="timeout" from="CoinTimer" to="." method="_on_coin_timer_timeout"]
 [connection signal="timeout" from="PlatformTimer" to="." method="_on_platform_timer_timeout"]

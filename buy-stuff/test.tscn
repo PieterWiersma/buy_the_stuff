@@ -4,23 +4,28 @@
 [ext_resource type="Script" path="res://test.gd" id="1_w0fr1"]
 [ext_resource type="PackedScene" uid="uid://dg8yhobkc2qwa" path="res://PlayerModel/player.tscn" id="2_eppdl"]
 [ext_resource type="PackedScene" uid="uid://5d0myasppyb8" path="res://LevelBlocks/gravity.tscn" id="5_qfno7"]
-[ext_resource type="PackedScene" uid="uid://2n6a5d14epr" path="res://LevelBlocks/sprintbox.tscn" id="6_upvj2"]
+[ext_resource type="PackedScene" uid="uid://ds25ca0fs84f" path="res://LevelBlocks/platform.tscn" id="6_l83n8"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_w0fr1")
 
 [node name="Floor" parent="." instance=ExtResource("1_l1x3g")]
 position = Vector2(5, 14)
+velocity_change = 40
+is_floor = false
 
 [node name="Player" parent="." instance=ExtResource("2_eppdl")]
-position = Vector2(199, 579)
+position = Vector2(132, 498)
 collision_layer = 519
-collision_mask = 257
+collision_mask = 273
 
 [node name="Gravity" parent="." instance=ExtResource("5_qfno7")]
 
-[node name="SprintBox" parent="." instance=ExtResource("6_upvj2")]
-position = Vector2(1098, 549)
-
 [node name="Floor2" parent="." instance=ExtResource("1_l1x3g")]
 position = Vector2(15, 641)
+scale = Vector2(1, 0.637837)
+
+[node name="Platform" parent="." instance=ExtResource("6_l83n8")]
+position = Vector2(1022, 841)
+x_speed = 1
+x_scale = 1.0

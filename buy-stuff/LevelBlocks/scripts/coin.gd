@@ -35,6 +35,6 @@ func go_explode() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	go_explode() # Replace with function body.
 	if body.name == "Player":
+		go_explode()
 		body.coins += 1

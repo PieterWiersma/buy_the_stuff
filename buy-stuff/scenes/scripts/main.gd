@@ -3,8 +3,8 @@ extends Node
 # will be initial stats
 var player: Player 
 var player_stats = {
-	"max_jumps": 44,
-	"max_hover": 4,
+	"max_jumps": 4,
+	"max_hover": 1,
 	"coins": 100
 }
 
@@ -86,12 +86,3 @@ func load_player_stats_from_file():
 func save_player_stats_to_file():
 	# TODO modulise
 	pass
-
-func _on_change_level_button_down() -> void:
-	var new_scene = preload("res://scenes/level_0.tscn").instantiate()
-	self.remove_child(self.get_node('Level'))
-	self.add_child(new_scene)
-	self.move_child(new_scene, 0)
-	new_scene.name = 'Level'
-	new_scene.sgnl_player_died.connect(_on_level_sgnl_player_died)
-	

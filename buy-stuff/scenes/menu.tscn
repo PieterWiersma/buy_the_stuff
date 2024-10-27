@@ -41,10 +41,10 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("3_xqvjt")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 224.0
-offset_top = 118.0
-offset_right = 925.0
-offset_bottom = 311.0
+offset_left = 225.0
+offset_top = 140.0
+offset_right = 926.0
+offset_bottom = 333.0
 theme_override_fonts/font = SubResource("SystemFont_rkcg8")
 theme_override_font_sizes/font_size = 128
 text = "BUY STUFF"
@@ -53,6 +53,22 @@ text = "BUY STUFF"
 wait_time = 4.335
 one_shot = true
 
+[node name="Level0Button" type="Button" parent="."]
+offset_left = 417.0
+offset_top = 69.0
+offset_right = 533.0
+offset_bottom = 116.0
+text = "Level 0"
+
+[node name="LevelSButton" type="Button" parent="."]
+offset_left = 577.0
+offset_top = 69.0
+offset_right = 693.0
+offset_bottom = 116.0
+text = "Level Spawn"
+
 [connection signal="button_down" from="PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="button_down" from="ShopButton" to="." method="_on_shop_button_button_down"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="button_down" from="Level0Button" to="." method="_on_change_2_level_0"]
+[connection signal="button_down" from="LevelSButton" to="." method="_on_change_2_level_spawn"]

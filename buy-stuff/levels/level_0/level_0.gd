@@ -41,6 +41,7 @@ func _on_level_block_timer_timeout() -> void:
 		if not i == random_lvlblock:
 			levels.remove_child(lvl_blocks[i])
 			
+	levels.get_child(0).show()		
 	add_child(levels)
 
 func _on_player_sgnl_player_died() -> void:

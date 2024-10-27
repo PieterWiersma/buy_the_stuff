@@ -1,14 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://b74kwpnht8iks"]
+[gd_scene load_steps=10 format=3 uid="uid://b74kwpnht8iks"]
 
-[ext_resource type="Script" path="res://scenes/scripts/level_0.gd" id="1_3pgny"]
-[ext_resource type="PackedScene" uid="uid://56ceirydn6yi" path="res://level_0_blocks.tscn" id="2_cjq31"]
-[ext_resource type="Shader" path="res://shaders/TV.gdshader" id="6_0bis4"]
-[ext_resource type="PackedScene" uid="uid://ocryeli0i7dx" path="res://LevelBlocks/floor.tscn" id="7_71cst"]
-[ext_resource type="PackedScene" uid="uid://dg8yhobkc2qwa" path="res://PlayerModel/player.tscn" id="8_n3ja3"]
-[ext_resource type="PackedScene" uid="uid://5d0myasppyb8" path="res://LevelBlocks/gravity.tscn" id="9_e0boj"]
+[ext_resource type="Script" path="res://levels/level_0/level_0.gd" id="1_innjs"]
+[ext_resource type="PackedScene" uid="uid://56ceirydn6yi" path="res://levels/level_0/level_0_blocks.tscn" id="2_7gklw"]
+[ext_resource type="Shader" path="res://shaders/TV.gdshader" id="3_edqu2"]
+[ext_resource type="PackedScene" uid="uid://ocryeli0i7dx" path="res://LevelBlocks/floor.tscn" id="4_injn7"]
+[ext_resource type="PackedScene" uid="uid://dg8yhobkc2qwa" path="res://PlayerModel/player.tscn" id="5_lpx2e"]
+[ext_resource type="PackedScene" uid="uid://5d0myasppyb8" path="res://LevelBlocks/gravity.tscn" id="6_mnsce"]
+[ext_resource type="AudioStream" uid="uid://cflin4d0ye8vl" path="res://boombop.mp3" id="7_pr4kg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vuvf0"]
-shader = ExtResource("6_0bis4")
+shader = ExtResource("3_edqu2")
 shader_parameter/vertJerkOpt = 0.2
 shader_parameter/vertMovementOpt = 0.0
 shader_parameter/bottomStaticOpt = 0.0
@@ -20,20 +21,19 @@ shader_parameter/horzFuzzOpt = 0.15
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2m7l"]
 
 [node name="Level" type="Node2D"]
-script = ExtResource("1_3pgny")
-level_blocks = ExtResource("2_cjq31")
+script = ExtResource("1_innjs")
+level_blocks = ExtResource("2_7gklw")
 
 [node name="Background" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_vuvf0")
 
-[node name="Floor" parent="Background" instance=ExtResource("7_71cst")]
-visible = false
+[node name="Floor" parent="Background" instance=ExtResource("4_injn7")]
 position = Vector2(-3, 559)
 
-[node name="Roof" parent="Background" instance=ExtResource("7_71cst")]
-visible = false
+[node name="Roof" parent="Background" instance=ExtResource("4_injn7")]
 position = Vector2(-3, 0)
 velocity_change = 100
+is_floor = false
 metadata/_edit_lock_ = true
 
 [node name="top" type="ColorRect" parent="Background"]
@@ -41,7 +41,7 @@ offset_left = -20.0
 offset_top = -12.0
 offset_right = 1179.0
 offset_bottom = 562.0
-color = Color(0.024357, 1.75888e-05, 0.123784, 1)
+color = Color(0.30626, 0, 0.0218715, 1)
 metadata/_edit_lock_ = true
 
 [node name="bottom" type="ColorRect" parent="Background"]
@@ -71,15 +71,20 @@ scale = Vector2(60, 35)
 shape = SubResource("RectangleShape2D_b2m7l")
 action = "jump"
 
-[node name="Player" parent="." instance=ExtResource("8_n3ja3")]
+[node name="Player" parent="." instance=ExtResource("5_lpx2e")]
 position = Vector2(177, 69)
-collision_layer = 14
 collision_mask = 1
 motion_mode = 1
 platform_floor_layers = 4294901775
 platform_wall_layers = 15
+player_color = "#310083"
 
-[node name="Gravity" parent="." instance=ExtResource("9_e0boj")]
+[node name="Gravity" parent="." instance=ExtResource("6_mnsce")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_pr4kg")
+autoplay = true
+parameters/looping = true
 
 [connection signal="timeout" from="LevelBlockTimer" to="." method="_on_level_block_timer_timeout"]
 [connection signal="sgnl_player_died" from="Player" to="." method="_on_player_sgnl_player_died"]

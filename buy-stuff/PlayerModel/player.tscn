@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://dg8yhobkc2qwa"]
+[gd_scene load_steps=12 format=3 uid="uid://dg8yhobkc2qwa"]
 
 [ext_resource type="Script" path="res://PlayerModel/scripts/player.gd" id="1_2vnrk"]
 [ext_resource type="Shader" path="res://shaders/retro_glow.gdshader" id="2_tg25c"]
 [ext_resource type="Script" path="res://PlayerModel/scripts/animations.gd" id="2_yab13"]
 [ext_resource type="PackedScene" uid="uid://c5q5tydk64n6l" path="res://PlayerModel/hover_animation.tscn" id="3_7avhi"]
+[ext_resource type="PackedScene" uid="uid://cqvsorfybjghr" path="res://PlayerModel/jump_meter.tscn" id="4_5eltt"]
 [ext_resource type="Script" path="res://PlayerModel/scripts/jump.gd" id="4_n5nwh"]
 [ext_resource type="PackedScene" uid="uid://bsrof0qm15bef" path="res://PlayerModel/loader.tscn" id="5_yir65"]
 [ext_resource type="Texture2D" uid="uid://difi524jggj23" path="res://light.png" id="7_7jspx"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_b3faq"]
-radius = 23.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eo4bg"]
+size = Vector2(45.0003, 45.9997)
 
 [sub_resource type="GDScript" id="GDScript_jxi88"]
 script/source = "extends Node
@@ -29,11 +30,13 @@ shader_parameter/b_offset = 0.0
 [node name="Player" type="CharacterBody2D" groups=["gravity_affected"]]
 position = Vector2(549, 587)
 rotation = -6.28319
-collision_mask = 256
+collision_layer = 15
+collision_mask = 257
 script = ExtResource("1_2vnrk")
 
 [node name="NormalCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_b3faq")
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_eo4bg")
 
 [node name="EffectTimer" type="Timer" parent="."]
 wait_time = 0.103
@@ -42,6 +45,7 @@ one_shot = true
 [node name="Animations" type="Node" parent="."]
 script = ExtResource("2_yab13")
 hover_effect = ExtResource("3_7avhi")
+jump_meter = ExtResource("4_5eltt")
 
 [node name="Jump" type="Node" parent="."]
 script = ExtResource("4_n5nwh")

@@ -1,6 +1,7 @@
-extends StaticBody2D
+extends Node2D
 
 @export var x_speed: int
+@export var x_scale: float
 
 var increment: float
 
@@ -8,9 +9,10 @@ var increment: float
 var allowed_to_delete: bool = false
 
 func _ready() -> void:
+	# mostly for test levels
 	if not x_speed:
-		# mostly for test levels
 		x_speed = (randf() * 1000) 
+	if not x_scale:
 		self.scale.x = clamp(randf(), 0.2, 0.4)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

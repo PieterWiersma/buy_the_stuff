@@ -2,31 +2,31 @@
 
 [ext_resource type="Shader" path="res://shaders/retro_glow.gdshader" id="1_27ow7"]
 [ext_resource type="Script" path="res://LevelBlocks/scripts/platform.gd" id="1_avaoo"]
+[ext_resource type="PackedScene" uid="uid://ocryeli0i7dx" path="res://LevelBlocks/floor.tscn" id="2_np8lo"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_76x8x"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kuxqc"]
 shader = ExtResource("1_27ow7")
-shader_parameter/rect_size = Vector2(0.45, 0.1)
+shader_parameter/rect_size = Vector2(0.3, 0.01)
 shader_parameter/bness = 1.0
-shader_parameter/fall_off_scale = 3.0
-shader_parameter/b_offset = 0.0
+shader_parameter/fall_off_scale = 3.49
+shader_parameter/b_offset = 0.32
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvoeb"]
-size = Vector2(1153, 40.5)
-
-[node name="Platform" type="StaticBody2D" groups=["lvl_object"]]
-position = Vector2(5, 264)
+[node name="Platform" type="Node2D" groups=["lvl_object"]]
 script = ExtResource("1_avaoo")
 metadata/is_floor = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_76x8x")
-offset_left = -5.0
-offset_top = -26.0
-offset_right = 1144.0
-offset_bottom = 35.0
-color = Color(1, 1, 0.32549, 1)
-metadata/_edit_use_anchors_ = true
+[node name="Floor" parent="." instance=ExtResource("2_np8lo")]
+position = Vector2(-4, 16)
+scale = Vector2(0.96, 0.480001)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(571.5, 5.75)
-shape = SubResource("RectangleShape2D_lvoeb")
+[node name="Ceiling" parent="." instance=ExtResource("2_np8lo")]
+position = Vector2(-4, 41)
+scale = Vector2(0.96, 0.759998)
+is_floor = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_kuxqc")
+offset_top = 8.0
+offset_right = 1155.0
+offset_bottom = 62.0
+color = Color(0.197952, 0.901178, 0.200888, 1)
