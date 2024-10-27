@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://ddok0k31c7yu1"]
 
-[ext_resource type="PackedScene" uid="uid://d0t01hf3v82x6" path="res://LevelBlocks/floor (2).tscn" id="1_l1x3g"]
+[ext_resource type="PackedScene" uid="uid://ocryeli0i7dx" path="res://LevelBlocks/floor.tscn" id="1_l1x3g"]
 [ext_resource type="Script" path="res://test.gd" id="1_w0fr1"]
 [ext_resource type="PackedScene" uid="uid://dg8yhobkc2qwa" path="res://PlayerModel/player.tscn" id="2_eppdl"]
 [ext_resource type="PackedScene" uid="uid://5d0myasppyb8" path="res://LevelBlocks/gravity.tscn" id="5_qfno7"]
-[ext_resource type="PackedScene" uid="uid://2n6a5d14epr" path="res://LevelBlocks/sprint_box.tscn" id="6_upvj2"]
+[ext_resource type="PackedScene" uid="uid://2n6a5d14epr" path="res://LevelBlocks/sprintbox.tscn" id="6_upvj2"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_w0fr1")

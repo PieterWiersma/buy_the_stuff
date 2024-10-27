@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ocryeli0i7dx"]
 
 [ext_resource type="Shader" path="res://shaders/retro_glow.gdshader" id="1_8va0g"]
-[ext_resource type="Script" path="res://LevelBlocks/floor.gd" id="1_qnxek"]
+[ext_resource type="Script" path="res://LevelBlocks/scripts/floor.gd" id="1_qnxek"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_76x8x"]
 shader = ExtResource("1_8va0g")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://blw54ox33juq"]
 
-[ext_resource type="Script" path="res://LevelBlocks/coin.gd" id="1_kajnk"]
+[ext_resource type="Script" path="res://LevelBlocks/scripts/coin.gd" id="1_kajnk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8y7p4"]
 size = Vector2(37, 36)
@@ -36,8 +36,4 @@ metadata/_edit_group_ = true
 wait_time = 0.112
 one_shot = true
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-metadata/_edit_group_ = true
-
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

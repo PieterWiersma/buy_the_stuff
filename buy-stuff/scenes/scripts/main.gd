@@ -36,6 +36,7 @@ func _on_exit_shop():
 	apply_player_stats()
 
 func _on_level_sgnl_player_died() -> void:
+	print('sf')
 	get_player_stats()
 	$Menu.show()
 
@@ -85,3 +86,12 @@ func load_player_stats_from_file():
 func save_player_stats_to_file():
 	# TODO modulise
 	pass
+
+func _on_change_level_button_down() -> void:
+	var new_scene = preload("res://scenes/level_0.tscn").instantiate()
+	self.remove_child(self.get_node('Level'))
+	self.add_child(new_scene)
+	self.move_child(new_scene, 0)
+	new_scene.name = 'Level'
+	new_scene.sgnl_player_died.connect(_on_level_sgnl_player_died)
+	

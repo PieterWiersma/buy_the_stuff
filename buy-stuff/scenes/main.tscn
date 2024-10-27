@@ -18,7 +18,15 @@ visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_2rk7k")
+autoplay = true
 parameters/looping = true
+
+[node name="ChangeLevel" type="Button" parent="."]
+offset_left = 997.0
+offset_top = 10.0
+offset_right = 1136.0
+offset_bottom = 55.0
+text = "test new level"
 
 [connection signal="sgnl_player_died" from="Level" to="." method="_on_level_sgnl_player_died"]
 [connection signal="buy_hover" from="Shop" to="." method="_on_shop_buy_hover"]
@@ -26,3 +34,4 @@ parameters/looping = true
 [connection signal="exit_shop" from="Shop" to="." method="_on_exit_shop"]
 [connection signal="play" from="Menu" to="." method="_on_menu_play"]
 [connection signal="shop" from="Menu" to="." method="_on_menu_shop"]
+[connection signal="button_down" from="ChangeLevel" to="." method="_on_change_level_button_down"]

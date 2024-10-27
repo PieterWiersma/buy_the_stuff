@@ -4,13 +4,13 @@ extends CharacterBody2D
 
 class_name Player
 
-signal sgnl_player_died(player: Player)
+signal sgnl_player_died()
+
+# Variables others to set
+@export var level_position: Vector2 = Vector2(250,250)
 
 var game_settings: GameSettings = GameSettings.new()
 var player_settings: PlayerSettings = PlayerSettings.new()
-
-# Variables others to set
-var level_position: Vector2
 
 # Variables for others to interact with
 var jump_speed: int = player_settings.JUMP_SPEED
@@ -30,6 +30,7 @@ var max_hover: float = 1.0
 # variables for internal process
 var n_jumps: int = 0
 var is_dead: bool = false
+var is_sprinting: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -48,33 +49,27 @@ func _process(delta: float) -> void:
 		$Animations.do_effect(self, 'jump')
 		
 	if Input.is_action_just_released("jump"):
-		$Jump.unhover()
+		$Jump.unhover(self)
 		$Animations.set_animation(self, 'walk')
 		
-	# It can get stuck if not forced here
-	if Input.is_action_pressed("boost"):
-		self.velocity.x += 10
-		
-	
 
 func _physics_process(delta: float) -> void:
 	# This handles the player movement, though actual inputs are
 	# handled in respective 'modules'
-	
-	# Keep player on 50% of the screen
-	if self.position.x > game_settings.WINDOWS_SIZE * 0.50:
-		self.velocity.x = -10
-	elif self.position.x < self.level_position[0]-50:
-		self.velocity.x = 10
-	elif self.position.x > self.level_position[0]:
-		self.velocity.x -= 200 * delta
 
+	# Keep player on 50% of the screen // boost between 20 and 50
+	if is_sprinting and self.position.x > game_settings.WINDOWS_SIZE * 0.50:
+		self.velocity.x = -200
+		is_sprinting = false
+	if not is_sprinting and self.position.x < game_settings.WINDOWS_SIZE * 0.20:
+		self.velocity.x = 0
 
 	# Handle interactions
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
 		if collision_info.get_collider().get('velocity_change'):
 			self.velocity.y += collision_info.get_collider().get('velocity_change')
+
 		# Standard behaviour when ap proaching a floor
 		if collision_info.get_collider().get_meta('is_floor', true):
 			# If we land, we're allowed to jump again
@@ -87,11 +82,11 @@ func _physics_process(delta: float) -> void:
 
 
 func unhover():
-	$Jump.unhover()
+	$Jump.unhover(self)
 
 func die():
 	if not is_dead:
-		sgnl_player_died.emit(self)
+		sgnl_player_died.emit()
 		self.hide()
 		is_dead = true
 

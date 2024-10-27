@@ -30,7 +30,6 @@ func set_animation(player: Player, animation: String):
 		self.add_child(new_animation)
 	else:
 		player.color_rect.show()
-		
 		new_animation = PlayerAnimationWalk.new()
 		new_animation.player = player
 		new_animation.rotation_speed = player_settings.ROTATION_SPEED

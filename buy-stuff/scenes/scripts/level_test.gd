@@ -5,7 +5,7 @@ extends Node
 @export var skull_scene: PackedScene
 @export var platform_scene: PackedScene
 
-signal sgnl_player_died(player: Player)
+signal sgnl_player_died()
 
 var increment: float = 0.001
 
@@ -97,5 +97,5 @@ func start_level() -> void:
 	$Player.start(120,10)
 
 
-func _on_player_sgnl_player_died(player: Player) -> void:
-	sgnl_player_died.emit(player)
+func _on_player_sgnl_player_died() -> void:
+	sgnl_player_died.emit()

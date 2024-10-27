@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3 uid="uid://b74kwpnht8iks"]
+
+[ext_resource type="Script" path="res://scenes/scripts/level_0.gd" id="1_3pgny"]
+[ext_resource type="PackedScene" uid="uid://56ceirydn6yi" path="res://level_0_blocks.tscn" id="2_cjq31"]
+[ext_resource type="Shader" path="res://shaders/TV.gdshader" id="6_0bis4"]
+[ext_resource type="PackedScene" uid="uid://ocryeli0i7dx" path="res://LevelBlocks/floor.tscn" id="7_71cst"]
+[ext_resource type="PackedScene" uid="uid://dg8yhobkc2qwa" path="res://PlayerModel/player.tscn" id="8_n3ja3"]
+[ext_resource type="PackedScene" uid="uid://5d0myasppyb8" path="res://LevelBlocks/gravity.tscn" id="9_e0boj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vuvf0"]
+shader = ExtResource("6_0bis4")
+shader_parameter/vertJerkOpt = 0.2
+shader_parameter/vertMovementOpt = 0.0
+shader_parameter/bottomStaticOpt = 0.0
+shader_parameter/bottomStaticStrenth = 0.7
+shader_parameter/scalinesOpt = 0.8
+shader_parameter/rgbOffsetOpt = 0.2
+shader_parameter/horzFuzzOpt = 0.15
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2m7l"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_3pgny")
+level_blocks = ExtResource("2_cjq31")
+
+[node name="Background" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_vuvf0")
+
+[node name="Floor" parent="Background" instance=ExtResource("7_71cst")]
+visible = false
+position = Vector2(-3, 559)
+
+[node name="Roof" parent="Background" instance=ExtResource("7_71cst")]
+visible = false
+position = Vector2(-3, 0)
+velocity_change = 100
+metadata/_edit_lock_ = true
+
+[node name="top" type="ColorRect" parent="Background"]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 1179.0
+offset_bottom = 562.0
+color = Color(0.024357, 1.75888e-05, 0.123784, 1)
+metadata/_edit_lock_ = true
+
+[node name="bottom" type="ColorRect" parent="Background"]
+offset_left = -8.0
+offset_top = 562.0
+offset_right = 1170.0
+offset_bottom = 670.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="floor" type="ColorRect" parent="Background"]
+offset_left = -13.0
+offset_top = 559.0
+offset_right = 1152.0
+offset_bottom = 562.0
+color = Color(0.531574, 0.000203016, 0.53164, 1)
+metadata/_edit_lock_ = true
+
+[node name="LevelBlockTimer" type="Timer" parent="."]
+wait_time = 3.342
+autostart = true
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+visible = false
+position = Vector2(600, 300)
+scale = Vector2(60, 35)
+shape = SubResource("RectangleShape2D_b2m7l")
+action = "jump"
+
+[node name="Player" parent="." instance=ExtResource("8_n3ja3")]
+position = Vector2(177, 69)
+collision_layer = 14
+collision_mask = 1
+motion_mode = 1
+platform_floor_layers = 4294901775
+platform_wall_layers = 15
+
+[node name="Gravity" parent="." instance=ExtResource("9_e0boj")]
+
+[connection signal="timeout" from="LevelBlockTimer" to="." method="_on_level_block_timer_timeout"]
+[connection signal="sgnl_player_died" from="Player" to="." method="_on_player_sgnl_player_died"]
