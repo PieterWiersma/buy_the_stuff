@@ -36,7 +36,7 @@ func _hover_start():
 
 		# technically an effect maybe?
 		var new_loader = loader.instantiate()
-		
+		new_loader.visible = player.visible
 		new_loader.rotation_speed_sec = player.max_hover 
 		new_loader.position = player.position + Vector2(-50,-50)
 		new_loader.size = Vector2(2,2)

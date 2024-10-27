@@ -10,7 +10,7 @@ var explode: bool = false
 func _ready() -> void:
 	
 	if x_speed == 0:
-		x_speed = (randf() * 200) + 3
+		x_speed = (randf() * 400) + 3
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

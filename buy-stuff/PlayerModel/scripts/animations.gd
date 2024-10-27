@@ -25,6 +25,7 @@ func set_animation(player: Player, animation: String):
 	if animation == 'hover':
 		player.color_rect.hide()
 		new_animation = hover_effect.instantiate()
+		new_animation.visible = player.visible
 		new_animation.player = player
 		self.add_child(new_animation)
 	else:
@@ -51,6 +52,7 @@ func do_effect(player: Player, effect: String):
 		# add jump meter
 		var new_jump_meter = jump_meter.instantiate()
 		new_jump_meter.player = player
+		new_jump_meter.visible = player.visible
 		add_child(new_jump_meter)
 
 	
