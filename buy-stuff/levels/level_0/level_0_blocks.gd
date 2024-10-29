@@ -1,11 +1,17 @@
 extends Node2D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+signal sgnl_new_block
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _physics_process(delta: float) -> void:
+	self.position.x -= 2
+	#print(position)
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	print('fdsds')
+	sgnl_new_block.emit() 
+
+#
+#func _on_exit_notifier_screen_exited() -> void:
+	#print('vcxvx')
+	#self.queue_free()

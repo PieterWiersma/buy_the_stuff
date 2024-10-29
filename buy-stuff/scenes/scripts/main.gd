@@ -5,7 +5,10 @@ var player: Player
 var player_stats = {
 	"max_jumps": 4,
 	"max_hover": 1,
-	"coins": 100
+	"coins": 100,
+	"level_spawn": {
+		"highscore": 0
+	}
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -35,7 +38,7 @@ func _on_exit_shop():
 	$Menu.show()
 	apply_player_stats()
 
-func _on_level_sgnl_player_died() -> void:
+func _on_level_sgnl_player_died(score) -> void:
 	print('sf')
 	get_player_stats()
 	$Menu.show()

@@ -29,7 +29,7 @@ func _on_change_2_level_0() -> void:
 	change_level(new_scene)
 	
 func _on_change_2_level_spawn() -> void:
-	var new_scene = preload("res://levels/level_spawn/level_spawb.tscn").instantiate()
+	var new_scene = preload("res://levels/level_spawn/level_spawn.tscn").instantiate()
 	change_level(new_scene)
 
 func change_level(new_scene: Node):

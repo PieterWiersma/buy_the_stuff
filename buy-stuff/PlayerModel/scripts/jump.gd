@@ -2,27 +2,45 @@ extends Node
 
 @export var loader: PackedScene
 
-var game_settings = GameSettings.new()
+var gs = GameSettings.new()
+var ps = PlayerSettings.new()
 
-var jump_speed: int
+var jump_speed: int 
 var player: Player
 
 # internals
 var just_hovered: bool = false
 
-func jump(player_arg: Player, jump_speed_arg: int):
-	# TODO
-	player = player_arg
-	jump_speed = jump_speed_arg
-	player.floored = false
-	if $InputDelay.is_stopped():
-		print('start')
-		$InputDelay.start()
-	else:
-		print('stop')
-		$InputDelay.stop()
-		_hover_start()
+func _ready() -> void:
+	player = get_parent()
+	jump_speed = ps.JUMP_SPEED
 
+
+func jump_in():
+	if $InputDelay.is_stopped():
+		$InputDelay.start()
+
+
+func jump_out():
+	player.floored = false
+	if not $InputDelay.is_stopped():
+		$InputDelay.stop()
+		self._jump()
+
+
+func _jump():
+	if player.max_jumps > player.n_jumps:
+		player.animations.do_effect('jump')
+		
+		# add to jumps, remove floored status, jump
+		player.n_jumps += 1
+		player.velocity.y = -jump_speed 
+		
+		# Create animation
+		var jump_spawn = JumpSpawn.new()
+		jump_spawn.player = player
+		self.add_child(jump_spawn)
+		
 
 func _hover_start():
 	if $HoverTimerReset.is_stopped():
@@ -30,8 +48,8 @@ func _hover_start():
 		
 		$HoverTimer.wait_time = player.max_hover
 		$HoverTimer.start()
-		player.animations.set_animation(player, 'hover')
-		player.remove_from_group(game_settings.GRAVITY_GROUP) 
+		player.animations.set_animation('hover')
+		player.remove_from_group(gs.GRAVITY_GROUP) 
 		player.velocity.y = 0
 
 		# technically an effect maybe?
@@ -44,32 +62,24 @@ func _hover_start():
 	
 
 func _on_jump_timer_timeout() -> void:
-	if player.max_jumps > player.n_jumps:
-		# add to jumps, remove floored status, jump
-		player.n_jumps += 1
-		player.velocity.y = -jump_speed 
-		
-		# Create animation
-		var jump_spawn = JumpSpawn.new()
-		jump_spawn.player = player
-		self.add_child(jump_spawn)
-		
+	self._hover_start()
+
 
 func _on_hover_timer_timeout() -> void:
-	player.animations.set_animation(player, 'walk')
-	unhover(player) # Player should exist at this point
+	player.animations.set_animation('walk')
+	unhover() # Player should exist at this point
 	
 
-func unhover(player_ref: Player):
+func unhover():
 	if just_hovered:
 		if get_node('Loader'):
 			get_node('Loader').queue_free()
 		$HoverTimerReset.start()
 		just_hovered = false
 		
-	player_ref.add_to_group(game_settings.GRAVITY_GROUP)
-	player_ref.jump_allowed = true
-	player_ref.animations.set_animation(player_ref, 'walk')
+	player.add_to_group(gs.GRAVITY_GROUP)
+	player.jump_allowed = true
+	player.animations.set_animation('walk')
 
 
 func clear_all():

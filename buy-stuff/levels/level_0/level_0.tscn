@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b74kwpnht8iks"]
+[gd_scene load_steps=14 format=3 uid="uid://b74kwpnht8iks"]
 
 [ext_resource type="Script" path="res://levels/level_0/level_0.gd" id="1_innjs"]
 [ext_resource type="PackedScene" uid="uid://56ceirydn6yi" path="res://levels/level_0/level_0_blocks.tscn" id="2_7gklw"]
@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://dg8yhobkc2qwa" path="res://PlayerModel/player.tscn" id="5_lpx2e"]
 [ext_resource type="PackedScene" uid="uid://5d0myasppyb8" path="res://LevelBlocks/gravity.tscn" id="6_mnsce"]
 [ext_resource type="AudioStream" uid="uid://cflin4d0ye8vl" path="res://boombop.mp3" id="7_pr4kg"]
+[ext_resource type="PackedScene" uid="uid://ds25ca0fs84f" path="res://LevelBlocks/platform.tscn" id="8_38wq6"]
+[ext_resource type="PackedScene" uid="uid://d0qn4n25hjihd" path="res://LevelBlocks/jumpbox.tscn" id="9_0pdxn"]
+[ext_resource type="PackedScene" uid="uid://blw54ox33juq" path="res://LevelBlocks/coin.tscn" id="10_mwai1"]
+[ext_resource type="PackedScene" uid="uid://d2o56q43c2fa7" path="res://LevelBlocks/skull.tscn" id="11_21a44"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vuvf0"]
 shader = ExtResource("3_edqu2")
@@ -18,17 +22,16 @@ shader_parameter/scalinesOpt = 0.8
 shader_parameter/rgbOffsetOpt = 0.2
 shader_parameter/horzFuzzOpt = 0.15
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2m7l"]
+[sub_resource type="SystemFont" id="SystemFont_yftx8"]
+font_names = PackedStringArray("GB18030 Bitmap")
+subpixel_positioning = 0
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node"]
 script = ExtResource("1_innjs")
 level_blocks = ExtResource("2_7gklw")
 
 [node name="Background" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_vuvf0")
-
-[node name="Floor" parent="Background" instance=ExtResource("4_injn7")]
-position = Vector2(-3, 559)
 
 [node name="Roof" parent="Background" instance=ExtResource("4_injn7")]
 position = Vector2(-3, 0)
@@ -60,31 +63,96 @@ offset_bottom = 562.0
 color = Color(0.531574, 0.000203016, 0.53164, 1)
 metadata/_edit_lock_ = true
 
-[node name="LevelBlockTimer" type="Timer" parent="."]
-wait_time = 3.342
-autostart = true
-
-[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+[node name="Score" type="Label" parent="Background"]
 visible = false
-position = Vector2(600, 300)
-scale = Vector2(60, 35)
-shape = SubResource("RectangleShape2D_b2m7l")
-action = "jump"
+offset_left = 780.0
+offset_top = 18.0
+offset_right = 1143.0
+offset_bottom = 106.0
+theme_override_colors/font_color = Color(0, 0.968627, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_yftx8")
+theme_override_font_sizes/font_size = 47
+text = "012345"
+horizontal_alignment = 2
+
+[node name="DeadTimer" type="Timer" parent="Background"]
+wait_time = 2.582
+one_shot = true
+
+[node name="DeadLabel" type="Label" parent="Background"]
+visible = false
+offset_left = 122.0
+offset_top = 191.0
+offset_right = 1049.0
+offset_bottom = 468.0
+theme_override_font_sizes/font_size = 203
+text = "01232312"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Background/DeadLabel"]
+layout_mode = 0
+offset_left = 241.0
+offset_top = -101.0
+offset_right = 671.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(0, 0.937255, 0, 1)
+theme_override_font_sizes/font_size = 131
+text = "SCORE"
+horizontal_alignment = 1
 
 [node name="Player" parent="." instance=ExtResource("5_lpx2e")]
-position = Vector2(177, 69)
-collision_mask = 1
-motion_mode = 1
-platform_floor_layers = 4294901775
-platform_wall_layers = 15
-player_color = "#310083"
+rotation = -4.46638e-06
+player_color = Color(0.449588, 0.326374, 0.927169, 1)
+
+[node name="LevelBlockTimer" type="Timer" parent="."]
+wait_time = 2.436
+one_shot = true
+autostart = true
 
 [node name="Gravity" parent="." instance=ExtResource("6_mnsce")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_pr4kg")
-autoplay = true
 parameters/looping = true
 
+[node name="Node" type="Node2D" parent="."]
+
+[node name="Platform" parent="Node" instance=ExtResource("8_38wq6")]
+position = Vector2(216, 447)
+scale = Vector2(0.400001, 1)
+x_speed = 250
+x_scale = 1.0
+
+[node name="Box" parent="Node" instance=ExtResource("9_0pdxn")]
+position = Vector2(840, 386)
+x_speed = 250
+
+[node name="Box2" parent="Node" instance=ExtResource("9_0pdxn")]
+position = Vector2(1070, 380)
+x_speed = 250
+
+[node name="Box3" parent="Node" instance=ExtResource("9_0pdxn")]
+position = Vector2(1295, 370)
+x_speed = 250
+
+[node name="coin" parent="Node" instance=ExtResource("10_mwai1")]
+position = Vector2(1404, 71)
+x_speed = 250
+
+[node name="coin2" parent="Node" instance=ExtResource("10_mwai1")]
+position = Vector2(1585, 69)
+x_speed = 250
+
+[node name="coin3" parent="Node" instance=ExtResource("10_mwai1")]
+position = Vector2(1760, 74)
+x_speed = 250
+
+[node name="Skull" parent="Node" instance=ExtResource("11_21a44")]
+position = Vector2(1155, 536)
+x_speed = 250
+
+[node name="Skull2" parent="Node" instance=ExtResource("11_21a44")]
+position = Vector2(1574, 203)
+x_speed = 250
+
 [connection signal="timeout" from="LevelBlockTimer" to="." method="_on_level_block_timer_timeout"]
-[connection signal="sgnl_player_died" from="Player" to="." method="_on_player_sgnl_player_died"]

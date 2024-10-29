@@ -1,16 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://56ceirydn6yi"]
+[gd_scene load_steps=7 format=3 uid="uid://56ceirydn6yi"]
 
+[ext_resource type="Script" path="res://levels/level_0/level_0_blocks.gd" id="1_5hchp"]
 [ext_resource type="PackedScene" uid="uid://blw54ox33juq" path="res://LevelBlocks/coin.tscn" id="2_77e1q"]
+[ext_resource type="Script" path="res://levels/level_0/signal_setup.gd" id="2_dcwoy"]
 [ext_resource type="PackedScene" uid="uid://ds25ca0fs84f" path="res://LevelBlocks/platform.tscn" id="3_f3gha"]
 [ext_resource type="PackedScene" uid="uid://d0qn4n25hjihd" path="res://LevelBlocks/jumpbox.tscn" id="5_dk27h"]
 [ext_resource type="PackedScene" uid="uid://d2o56q43c2fa7" path="res://LevelBlocks/skull.tscn" id="7_hp381"]
 
 [node name="Level0Blocks" type="Node2D"]
 position = Vector2(1202, 108)
+script = ExtResource("1_5hchp")
 
 [node name="0" type="Node2D" parent="."]
 visible = false
-position = Vector2(332, -5)
+position = Vector2(433, 18)
+script = ExtResource("2_dcwoy")
 
 [node name="coin" parent="0" instance=ExtResource("2_77e1q")]
 position = Vector2(-109, -16)
@@ -37,7 +41,7 @@ position = Vector2(545, 226)
 x_speed = 250
 
 [node name="coin9" parent="0" instance=ExtResource("2_77e1q")]
-position = Vector2(336, 305)
+position = Vector2(568, -54)
 x_speed = 250
 
 [node name="Box" parent="0" instance=ExtResource("5_dk27h")]
@@ -49,9 +53,9 @@ position = Vector2(449, 59)
 x_speed = 250
 
 [node name="Platform" parent="0" instance=ExtResource("3_f3gha")]
-position = Vector2(571, 140)
+position = Vector2(569, 69)
 scale = Vector2(0.297249, 0.891809)
-x_speed = 520
+x_speed = 370
 
 [node name="Skull" parent="0" instance=ExtResource("7_hp381")]
 position = Vector2(563, 52)
@@ -67,61 +71,248 @@ position = Vector2(204, 231)
 position = Vector2(-137, 121)
 scale = Vector2(3.18283, 3.09188)
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="0"]
+position = Vector2(-514, 174)
+scale = Vector2(5.7, 6.1)
+
 [node name="1" type="Node2D" parent="."]
 visible = false
 position = Vector2(0, -181)
-metadata/_edit_group_ = true
+script = ExtResource("2_dcwoy")
 
 [node name="Platform" parent="1" instance=ExtResource("3_f3gha")]
-position = Vector2(622, 454)
+position = Vector2(161, 497)
 scale = Vector2(0.3, 1)
 x_speed = 300
 
 [node name="JumpBox" parent="1" instance=ExtResource("5_dk27h")]
-position = Vector2(930, 399)
+position = Vector2(469, 442)
 x_speed = 300
 
 [node name="JumpBox2" parent="1" instance=ExtResource("5_dk27h")]
-position = Vector2(999, 300)
+position = Vector2(538, 343)
+x_speed = 300
+
+[node name="JumpBox3" parent="1" instance=ExtResource("5_dk27h")]
+position = Vector2(863, 409)
+x_speed = 300
+
+[node name="JumpBox5" parent="1" instance=ExtResource("5_dk27h")]
+position = Vector2(1492, 404)
 x_speed = 300
 
 [node name="coin" parent="1" instance=ExtResource("2_77e1q")]
-position = Vector2(1095, 180)
+position = Vector2(634, 223)
 x_speed = 300
 
 [node name="Skull" parent="1" instance=ExtResource("7_hp381")]
-position = Vector2(975, 483)
+position = Vector2(514, 526)
 x_speed = 400
 
 [node name="Skull2" parent="1" instance=ExtResource("7_hp381")]
-position = Vector2(1062, 377)
+position = Vector2(601, 420)
 x_speed = 290
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="1"]
+position = Vector2(-651, 468)
 
 [node name="2" type="Node2D" parent="."]
 visible = false
 position = Vector2(-2, -3)
+script = ExtResource("2_dcwoy")
 
 [node name="Platform" parent="2" instance=ExtResource("3_f3gha")]
-position = Vector2(547, 61)
+position = Vector2(50, 61)
 scale = Vector2(0.3, 1)
 x_speed = 300
 
 [node name="coin" parent="2" instance=ExtResource("2_77e1q")]
-position = Vector2(693, 11)
+position = Vector2(196, 11)
+x_speed = 300
+
+[node name="JumpBox4" parent="2" instance=ExtResource("5_dk27h")]
+position = Vector2(675, 231)
+x_speed = 300
+
+[node name="JumpBox5" parent="2" instance=ExtResource("5_dk27h")]
+position = Vector2(878, 228)
+x_speed = 300
+
+[node name="JumpBox6" parent="2" instance=ExtResource("5_dk27h")]
+position = Vector2(1099, 233)
 x_speed = 300
 
 [node name="coin2" parent="2" instance=ExtResource("2_77e1q")]
-position = Vector2(768, 9)
+position = Vector2(271, 9)
 x_speed = 300
 
 [node name="coin3" parent="2" instance=ExtResource("2_77e1q")]
-position = Vector2(853, 8)
+position = Vector2(356, 8)
 x_speed = 300
 
 [node name="Skull" parent="2" instance=ExtResource("7_hp381")]
-position = Vector2(719, 392)
+position = Vector2(222, 392)
 x_speed = 400
 
 [node name="Skull2" parent="2" instance=ExtResource("7_hp381")]
-position = Vector2(1006, 251)
+position = Vector2(509, 251)
 x_speed = 290
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="2"]
+position = Vector2(-672, 233)
+
+[node name="3" type="Node2D" parent="."]
+visible = false
+position = Vector2(-2, -3)
+script = ExtResource("2_dcwoy")
+
+[node name="Platform" parent="3" instance=ExtResource("3_f3gha")]
+position = Vector2(6, 229)
+scale = Vector2(0.3, 1)
+x_speed = 300
+
+[node name="coin" parent="3" instance=ExtResource("2_77e1q")]
+position = Vector2(446, 174)
+x_speed = 300
+
+[node name="coin2" parent="3" instance=ExtResource("2_77e1q")]
+position = Vector2(155, 163)
+x_speed = 300
+
+[node name="coin3" parent="3" instance=ExtResource("2_77e1q")]
+position = Vector2(309, 39)
+x_speed = 300
+
+[node name="Skull" parent="3" instance=ExtResource("7_hp381")]
+position = Vector2(563, 325)
+scale = Vector2(1.71915, 1.69108)
+x_speed = 400
+
+[node name="Skull2" parent="3" instance=ExtResource("7_hp381")]
+position = Vector2(279, 135)
+scale = Vector2(1.4617, 1.6717)
+x_speed = 300
+
+[node name="JumpBox7" parent="3" instance=ExtResource("5_dk27h")]
+position = Vector2(716, 213)
+x_speed = 300
+
+[node name="JumpBox8" parent="3" instance=ExtResource("5_dk27h")]
+position = Vector2(1142, 216)
+x_speed = 300
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="3"]
+position = Vector2(-672, 233)
+
+[node name="4" type="Node2D" parent="."]
+visible = false
+position = Vector2(-7, -156)
+script = ExtResource("2_dcwoy")
+
+[node name="JumpBox" parent="4" instance=ExtResource("5_dk27h")]
+position = Vector2(123, 271)
+x_speed = 300
+
+[node name="JumpBox2" parent="4" instance=ExtResource("5_dk27h")]
+position = Vector2(503, 408)
+x_speed = 300
+
+[node name="JumpBox3" parent="4" instance=ExtResource("5_dk27h")]
+position = Vector2(696, 408)
+x_speed = 300
+
+[node name="JumpBox4" parent="4" instance=ExtResource("5_dk27h")]
+position = Vector2(1028, 408)
+x_speed = 300
+
+[node name="JumpBox5" parent="4" instance=ExtResource("5_dk27h")]
+position = Vector2(1190, 299)
+x_speed = 300
+
+[node name="coin" parent="4" instance=ExtResource("2_77e1q")]
+position = Vector2(230, 138)
+x_speed = 300
+
+[node name="coin2" parent="4" instance=ExtResource("2_77e1q")]
+position = Vector2(380, 260)
+x_speed = 300
+
+[node name="coin3" parent="4" instance=ExtResource("2_77e1q")]
+position = Vector2(304, 185)
+x_speed = 300
+
+[node name="Skull" parent="4" instance=ExtResource("7_hp381")]
+position = Vector2(171, 468)
+x_speed = 400
+
+[node name="Skull2" parent="4" instance=ExtResource("7_hp381")]
+position = Vector2(197, 335)
+x_speed = 290
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="4"]
+position = Vector2(-672, 233)
+
+[node name="5" type="Node2D" parent="."]
+position = Vector2(-7, -156)
+script = ExtResource("2_dcwoy")
+
+[node name="Platform" parent="5" instance=ExtResource("3_f3gha")]
+position = Vector2(413, 642)
+rotation = -1.56075
+scale = Vector2(0.3, 1)
+x_speed = 300
+color = "#660066"
+
+[node name="JumpBox" parent="5" instance=ExtResource("5_dk27h")]
+position = Vector2(271, 192)
+x_speed = 300
+
+[node name="JumpBox3" parent="5" instance=ExtResource("5_dk27h")]
+position = Vector2(662, 484)
+x_speed = 300
+
+[node name="JumpBox4" parent="5" instance=ExtResource("5_dk27h")]
+position = Vector2(865, 431)
+x_speed = 300
+
+[node name="JumpBox5" parent="5" instance=ExtResource("5_dk27h")]
+position = Vector2(1065, 342)
+x_speed = 300
+
+[node name="JumpBox6" parent="5" instance=ExtResource("5_dk27h")]
+position = Vector2(1331, 335)
+x_speed = 300
+
+[node name="JumpBox2" parent="5" instance=ExtResource("5_dk27h")]
+position = Vector2(193, 357)
+x_speed = 300
+
+[node name="coin" parent="5" instance=ExtResource("2_77e1q")]
+position = Vector2(378, 59)
+x_speed = 300
+
+[node name="coin2" parent="5" instance=ExtResource("2_77e1q")]
+position = Vector2(528, 181)
+x_speed = 300
+
+[node name="coin3" parent="5" instance=ExtResource("2_77e1q")]
+position = Vector2(452, 106)
+x_speed = 300
+
+[node name="Skull" parent="5" instance=ExtResource("7_hp381")]
+position = Vector2(319, 389)
+x_speed = 400
+
+[node name="Skull2" parent="5" instance=ExtResource("7_hp381")]
+position = Vector2(345, 256)
+x_speed = 290
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="5"]
+position = Vector2(-450, 320)
+
+[connection signal="screen_exited" from="0/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="1/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="2/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="3/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="4/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="5/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxm42pkl4oam4"]
+
+[ext_resource type="Script" path="res://PlayerModel/scripts/swipe_button.gd" id="1_m1v22"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_doetx"]
+size = Vector2(1152, 648)
+
+[node name="SwipeScreen" type="TouchScreenButton"]
+position = Vector2(576, 324)
+shape = SubResource("RectangleShape2D_doetx")
+script = ExtResource("1_m1v22")
+
+[node name="HoverTimer" type="Timer" parent="."]
+wait_time = 0.141
+one_shot = true
+
+[connection signal="timeout" from="HoverTimer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://bb37wdvvg4xbw"]
+
+[ext_resource type="Script" path="res://levels/base_level.gd" id="1_j33hs"]
+[ext_resource type="Shader" path="res://shaders/TV.gdshader" id="6_m2w1o"]
+[ext_resource type="PackedScene" uid="uid://dg8yhobkc2qwa" path="res://PlayerModel/player.tscn" id="8_8e58t"]
+[ext_resource type="PackedScene" uid="uid://5d0myasppyb8" path="res://LevelBlocks/gravity.tscn" id="9_by7uk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vuvf0"]
+shader = ExtResource("6_m2w1o")
+shader_parameter/vertJerkOpt = 0.2
+shader_parameter/vertMovementOpt = 0.0
+shader_parameter/bottomStaticOpt = 0.0
+shader_parameter/bottomStaticStrenth = 0.7
+shader_parameter/scalinesOpt = 0.8
+shader_parameter/rgbOffsetOpt = 0.2
+shader_parameter/horzFuzzOpt = 0.15
+
+[sub_resource type="SystemFont" id="SystemFont_cjlsw"]
+font_names = PackedStringArray("GB18030 Bitmap")
+subpixel_positioning = 0
+
+[node name="Level" type="Node"]
+script = ExtResource("1_j33hs")
+
+[node name="Background" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_vuvf0")
+
+[node name="Score" type="Label" parent="Background"]
+visible = false
+top_level = true
+offset_left = 780.0
+offset_top = 18.0
+offset_right = 1143.0
+offset_bottom = 106.0
+theme_override_colors/font_color = Color(0, 0.968627, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_cjlsw")
+theme_override_font_sizes/font_size = 47
+text = "012345"
+horizontal_alignment = 2
+
+[node name="DeadTimer" type="Timer" parent="Background"]
+wait_time = 2.582
+one_shot = true
+
+[node name="DeadLabel" type="Label" parent="Background"]
+visible = false
+top_level = true
+offset_left = 122.0
+offset_top = 191.0
+offset_right = 1049.0
+offset_bottom = 468.0
+theme_override_font_sizes/font_size = 203
+text = "01232312"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Background/DeadLabel"]
+layout_mode = 0
+offset_left = 241.0
+offset_top = -101.0
+offset_right = 671.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(0, 0.937255, 0, 1)
+theme_override_font_sizes/font_size = 131
+text = "SCORE"
+horizontal_alignment = 1
+
+[node name="CoinTimer" type="Timer" parent="."]
+wait_time = 1.05
+autostart = true
+
+[node name="PlatformTimer" type="Timer" parent="." groups=["box", "lvl_object"]]
+wait_time = 5.801
+autostart = true
+
+[node name="BoxTimer" type="Timer" parent="."]
+wait_time = 1.407
+autostart = true
+
+[node name="SkullTimer" type="Timer" parent="."]
+wait_time = 3.829
+autostart = true
+
+[node name="Player" parent="." instance=ExtResource("8_8e58t")]
+position = Vector2(177, 69)
+rotation = -4.46638e-06
+collision_layer = 3
+collision_mask = 3
+
+[node name="Gravity" parent="." instance=ExtResource("9_by7uk")]
+
+[connection signal="timeout" from="Background/DeadTimer" to="." method="_on_dead_timer_timeout"]
+[connection signal="sgnl_player_died" from="Player" to="." method="_on_player_sgnl_player_died"]

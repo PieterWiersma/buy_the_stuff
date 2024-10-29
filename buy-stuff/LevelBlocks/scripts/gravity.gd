@@ -1,13 +1,7 @@
 extends Node
 
-var game_settings = GameSettings.new()
+var gs = GameSettings.new()
 
-# Constants
-var MAX_DOWNFORCE: int = 1000
-var MAX_LIFT: int  = -1000
-
-# Variables for level to adjust
-var downforce_increment: int = 1000
 
 func _physics_process(delta: float) -> void:
 	for entity in get_tree().get_nodes_in_group("gravity_affected"):
@@ -16,6 +10,6 @@ func _physics_process(delta: float) -> void:
 				entity.velocity.y = 0
 				continue
 				
-		var new_velocity = entity.velocity.y + (downforce_increment * delta)
-		new_velocity = clamp(new_velocity, MAX_LIFT, MAX_DOWNFORCE)
+		var new_velocity = entity.velocity.y + (gs.DOWNFORCE * delta)
+		new_velocity = clamp(new_velocity, gs.MAX_LIFT, gs.MAX_DOWNFORCE)
 		entity.velocity.y = new_velocity

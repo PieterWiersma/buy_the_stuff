@@ -4,21 +4,21 @@ extends CharacterBody2D
 
 class_name Player
 
-@export var player_color: String
+@export var player_color: Color
 
 signal sgnl_player_died()
 
 # Variables others to set
 @export var level_position: Vector2 = Vector2(250,250)
 
-var game_settings: GameSettings = GameSettings.new()
-var player_settings: PlayerSettings = PlayerSettings.new()
+var gs: GameSettings = GameSettings.new()
+var ps: PlayerSettings = PlayerSettings.new()
 
 # Variables for others to interact with
-var jump_speed: int = player_settings.JUMP_SPEED
 var size: Vector2 
 var color_rect: ColorRect
 var animations: Object
+var jump: Object
 
 # Variables for others to read
 var floored: bool = false
@@ -28,33 +28,39 @@ var jump_allowed: bool = true
 var coins: int = 10
 var max_jumps: int = 20
 var max_hover: float = 1.0
+var jump_increase: int = 0
 
 # variables for internal process
 var n_jumps: int = 0
 var is_dead: bool = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.size = $ColorRect.size
 	self.color_rect = $ColorRect
 	self.animations = $Animations
-	self.add_to_group(game_settings.GRAVITY_GROUP)
+	self.add_to_group(gs.GRAVITY_GROUP)
+	self.jump = $Jump
 	
 	if self.player_color:
 		self.color_rect.color = self.player_color
+	print(self.color_rect.color)
+	$Animations.set_animation('walk')
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Handle inputs
+	#self.position.x = level_position[0]
 
 	# jump actions
 	if Input.is_action_just_pressed('jump'):
-		$Jump.jump(self, jump_speed)
-		$Animations.do_effect(self, 'jump')
+		$Jump.jump_in()
 		
 	if Input.is_action_just_released("jump"):
-		$Jump.unhover(self)
-		$Animations.set_animation(self, 'walk')
+		$Jump.jump_out()
+		$Jump.unhover()
+		$Animations.set_animation('walk')
 
 
 func _physics_process(delta: float) -> void:
@@ -77,15 +83,21 @@ func _physics_process(delta: float) -> void:
 			if self.velocity.y > 0:
 				self.velocity.y += -abs(self.velocity.y) / 10
 
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	self.die()
+
 	
 func unhover():
-	$Jump.unhover(self)
+	$Jump.unhover()
+
 
 func die():
 	if not is_dead:
 		sgnl_player_died.emit()
 		self.hide()
 		is_dead = true
+		print('Player Died')
 
 
 func start(x:int, y:int):

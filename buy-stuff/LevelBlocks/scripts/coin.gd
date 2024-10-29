@@ -10,14 +10,14 @@ var explode: bool = false
 func _ready() -> void:
 	
 	if x_speed == 0:
-		x_speed = (randf() * 400) + 3
+		x_speed = clamp((randf() * 400) + 3, 200, 900)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position.x -=  x_speed * delta
 	
 	# Better to use notifier,but that seemed buggy..
-	if global_position.x + (($ColorRect.size.x/2) * $ColorRect.scale.x) < 0:
+	if global_position.x + ($ColorRect.size.x * $ColorRect.scale.x) < 0:
 		queue_free()
 	
 	if explode:

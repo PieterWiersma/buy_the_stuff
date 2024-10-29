@@ -15,9 +15,10 @@ velocity_change = 40
 is_floor = false
 
 [node name="Player" parent="." instance=ExtResource("2_eppdl")]
-position = Vector2(132, 498)
+position = Vector2(608, 247)
 collision_layer = 519
 collision_mask = 273
+level_position = Vector2(600, 250)
 
 [node name="Gravity" parent="." instance=ExtResource("5_qfno7")]
 
@@ -26,6 +27,7 @@ position = Vector2(15, 641)
 scale = Vector2(1, 0.637837)
 
 [node name="Platform" parent="." instance=ExtResource("6_l83n8")]
-position = Vector2(1022, 841)
-x_speed = 1
+position = Vector2(-94, 1005)
+rotation = -1.63462
+x_speed = 100
 x_scale = 1.0

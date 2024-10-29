@@ -1,6 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dg8yhobkc2qwa"]
 
 [ext_resource type="Script" path="res://PlayerModel/scripts/player.gd" id="1_2vnrk"]
+[ext_resource type="PackedScene" uid="uid://bxm42pkl4oam4" path="res://PlayerModel/swipe_button.tscn" id="2_4ff78"]
 [ext_resource type="Shader" path="res://shaders/retro_glow.gdshader" id="2_tg25c"]
 [ext_resource type="Script" path="res://PlayerModel/scripts/animations.gd" id="2_yab13"]
 [ext_resource type="PackedScene" uid="uid://c5q5tydk64n6l" path="res://PlayerModel/hover_animation.tscn" id="3_7avhi"]
@@ -11,14 +12,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eo4bg"]
 size = Vector2(45.0003, 45.9997)
-
-[sub_resource type="GDScript" id="GDScript_jxi88"]
-script/source = "extends Node
-
-var game_settings = GameSettings.new()
-
-var player: Player 
-"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4vcxh"]
 shader = ExtResource("2_tg25c")
@@ -33,6 +26,9 @@ rotation = -6.28319
 collision_layer = 15
 collision_mask = 257
 script = ExtResource("1_2vnrk")
+
+[node name="SwipeScreen" parent="." instance=ExtResource("2_4ff78")]
+top_level = true
 
 [node name="NormalCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -1)
@@ -62,13 +58,6 @@ one_shot = true
 wait_time = 0.109
 one_shot = true
 
-[node name="Hover" type="Node" parent="."]
-script = SubResource("GDScript_jxi88")
-
-[node name="InputDelay" type="Timer" parent="Hover"]
-wait_time = 0.105
-one_shot = true
-
 [node name="ColorRect" type="ColorRect" parent="."]
 show_behind_parent = true
 z_index = 1
@@ -91,7 +80,10 @@ color = Color(0.670588, 0, 0, 1)
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = ExtResource("7_7jspx")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(5.28, 5.12001)
+
 [connection signal="timeout" from="EffectTimer" to="Animations" method="_on_effect_timer_timeout"]
 [connection signal="timeout" from="Jump/InputDelay" to="Jump" method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="Jump/HoverTimer" to="Jump" method="_on_hover_timer_timeout"]
-[connection signal="timeout" from="Hover/InputDelay" to="Hover" method="_hover_start"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

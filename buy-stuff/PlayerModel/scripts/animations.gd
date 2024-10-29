@@ -6,14 +6,14 @@ var player_settings: PlayerSettings = PlayerSettings.new()
 @export var hover_effect: PackedScene
 @export var jump_meter: PackedScene
 
-var global_player: Player
+var player: Player
 
 var last_animation: String 
 
 func _ready(): 
-	pass
+	player = get_parent()
 
-func set_animation(player: Player, animation: String):
+func set_animation(animation: String):
 	if last_animation == animation:
 		return 
 
@@ -38,8 +38,7 @@ func set_animation(player: Player, animation: String):
 	last_animation = animation
 
 
-func do_effect(player: Player, effect: String):
-	global_player = player
+func do_effect(effect: String):
 	# Effect manipulate shaders, the timer resets parameters
 	if effect == 'jump':
 		# Adapt Shader
@@ -57,6 +56,6 @@ func do_effect(player: Player, effect: String):
 
 	
 func _on_effect_timer_timeout() -> void:
-	global_player.get_node('ColorRect').material.set_shader_parameter('bness', 0.3)
-	global_player.get_node('ColorRect').material.set_shader_parameter('fall_off_scale', 3) # Replace with function body.
-	global_player.get_node('ColorRect').material.set_shader_parameter('rect_size', Vector2(.12, .12)) 
+	player.get_node('ColorRect').material.set_shader_parameter('bness', 0.3)
+	player.get_node('ColorRect').material.set_shader_parameter('fall_off_scale', 3) # Replace with function body.
+	player.get_node('ColorRect').material.set_shader_parameter('rect_size', Vector2(.12, .12)) 

@@ -1,6 +1,6 @@
 
 class_name PlayerSettings
 
-var ROTATION_SPEED: int = 180
-var JUMP_SPEED: int = 600
+var ROTATION_SPEED: int = 360
+var JUMP_SPEED: int = 700
 var COLOR: String = "#ab0000"
