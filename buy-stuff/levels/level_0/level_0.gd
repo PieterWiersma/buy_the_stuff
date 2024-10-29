@@ -1,6 +1,7 @@
 extends BaseLevel
 
 @export var level_blocks: PackedScene
+@export var start_lvl_block: PackedScene
 var lvlblock_names: Array[String] = ['0', '1', '2'] # TODO get from lvlblocks
 
 var increment: float = 0.001
@@ -9,7 +10,6 @@ var rng = RandomNumberGenerator.new()
 
 # internals
 #var levels: Node
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -55,12 +55,18 @@ func spawn_level():
 	add_child(levels)
 
 
+func start_level() -> void:
+	self.started = true
+	get_tree().call_group("lvl_object", "queue_free")
+	$Player.start(250,10)
+	$Player.n_jumps = 0
+	add_child(start_lvl_block.instantiate())
 
-#func _on_player_sgnl_player_died() -> void:
-	#self.started = false
-	#sgnl_player_died.emit(score)
-#
-#func start_level() -> void:
-	#self.started  = true
-	#get_tree().call_group("lvl_object", "queue_free")
-	#$Player.start(250,10)
+func _on_player_sgnl_player_died() -> void:
+	self.started = false
+	sgnl_player_died.emit(score)
+	started = false
+	$Background/DeadTimer.start()
+	$Background/DeadLabel.show()
+	$Background/DeadLabel.text = str(self.score)
+	$Background/Score.hide()

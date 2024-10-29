@@ -48,11 +48,15 @@ func do_effect(effect: String):
 		player.get_node('EffectTimer').wait_time = 0.1
 		player.get_node('EffectTimer').start()
 		
-		# add jump meter
-		var new_jump_meter = jump_meter.instantiate()
-		new_jump_meter.player = player
-		new_jump_meter.visible = player.visible
-		add_child(new_jump_meter)
+		spawn_jump_meter()
+		
+
+func spawn_jump_meter():
+	# add jump meter
+	var new_jump_meter = jump_meter.instantiate()
+	new_jump_meter.player = player
+	new_jump_meter.visible = player.visible
+	add_child(new_jump_meter)
 
 	
 func _on_effect_timer_timeout() -> void:

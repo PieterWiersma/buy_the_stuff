@@ -30,11 +30,11 @@ func jump_out():
 
 func _jump():
 	if player.max_jumps > player.n_jumps:
-		player.animations.do_effect('jump')
-		
 		# add to jumps, remove floored status, jump
 		player.n_jumps += 1
 		player.velocity.y = -jump_speed 
+		
+		player.animations.do_effect('jump')
 		
 		# Create animation
 		var jump_spawn = JumpSpawn.new()

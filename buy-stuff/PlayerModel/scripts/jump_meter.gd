@@ -19,7 +19,7 @@ func _ready() -> void:
 		new_jump.position.x = (i % MAX_ROW) * (SPACER+SIZE)
 		new_jump.position.y = floor(i/MAX_ROW) * (SPACER+SIZE)
 
-		if player.max_jumps - i >= player.max_jumps - player.n_jumps:
+		if player.max_jumps - i > player.max_jumps - player.n_jumps:
 			new_jump.color = USED_COLOR 
 		else:
 			new_jump.color = AVAILABLE_COLOR

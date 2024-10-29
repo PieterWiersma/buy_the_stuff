@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://b74kwpnht8iks"]
+[gd_scene load_steps=15 format=3 uid="uid://b74kwpnht8iks"]
 
 [ext_resource type="Script" path="res://levels/level_0/level_0.gd" id="1_innjs"]
 [ext_resource type="PackedScene" uid="uid://56ceirydn6yi" path="res://levels/level_0/level_0_blocks.tscn" id="2_7gklw"]
 [ext_resource type="Shader" path="res://shaders/TV.gdshader" id="3_edqu2"]
+[ext_resource type="PackedScene" uid="uid://duv2ge5dmt3aw" path="res://levels/level_0/start_block.tscn" id="3_v5lsl"]
 [ext_resource type="PackedScene" uid="uid://ocryeli0i7dx" path="res://LevelBlocks/floor.tscn" id="4_injn7"]
 [ext_resource type="PackedScene" uid="uid://dg8yhobkc2qwa" path="res://PlayerModel/player.tscn" id="5_lpx2e"]
 [ext_resource type="PackedScene" uid="uid://5d0myasppyb8" path="res://LevelBlocks/gravity.tscn" id="6_mnsce"]
@@ -29,6 +30,7 @@ subpixel_positioning = 0
 [node name="Level" type="Node"]
 script = ExtResource("1_innjs")
 level_blocks = ExtResource("2_7gklw")
+start_lvl_block = ExtResource("3_v5lsl")
 
 [node name="Background" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_vuvf0")
@@ -105,7 +107,7 @@ rotation = -4.46638e-06
 player_color = Color(0.449588, 0.326374, 0.927169, 1)
 
 [node name="LevelBlockTimer" type="Timer" parent="."]
-wait_time = 2.436
+wait_time = 3.523
 one_shot = true
 autostart = true
 
@@ -113,46 +115,48 @@ autostart = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_pr4kg")
+autoplay = true
 parameters/looping = true
 
-[node name="Node" type="Node2D" parent="."]
+[node name="StartBlock" type="Node2D" parent="." groups=["lvl_object"]]
 
-[node name="Platform" parent="Node" instance=ExtResource("8_38wq6")]
+[node name="Platform" parent="StartBlock" instance=ExtResource("8_38wq6")]
 position = Vector2(216, 447)
 scale = Vector2(0.400001, 1)
 x_speed = 250
 x_scale = 1.0
 
-[node name="Box" parent="Node" instance=ExtResource("9_0pdxn")]
+[node name="Box" parent="StartBlock" instance=ExtResource("9_0pdxn")]
 position = Vector2(840, 386)
 x_speed = 250
 
-[node name="Box2" parent="Node" instance=ExtResource("9_0pdxn")]
+[node name="Box2" parent="StartBlock" instance=ExtResource("9_0pdxn")]
 position = Vector2(1070, 380)
 x_speed = 250
 
-[node name="Box3" parent="Node" instance=ExtResource("9_0pdxn")]
+[node name="Box3" parent="StartBlock" instance=ExtResource("9_0pdxn")]
 position = Vector2(1295, 370)
 x_speed = 250
 
-[node name="coin" parent="Node" instance=ExtResource("10_mwai1")]
+[node name="coin" parent="StartBlock" instance=ExtResource("10_mwai1")]
 position = Vector2(1404, 71)
 x_speed = 250
 
-[node name="coin2" parent="Node" instance=ExtResource("10_mwai1")]
+[node name="coin2" parent="StartBlock" instance=ExtResource("10_mwai1")]
 position = Vector2(1585, 69)
 x_speed = 250
 
-[node name="coin3" parent="Node" instance=ExtResource("10_mwai1")]
+[node name="coin3" parent="StartBlock" instance=ExtResource("10_mwai1")]
 position = Vector2(1760, 74)
 x_speed = 250
 
-[node name="Skull" parent="Node" instance=ExtResource("11_21a44")]
+[node name="Skull" parent="StartBlock" instance=ExtResource("11_21a44")]
 position = Vector2(1155, 536)
 x_speed = 250
 
-[node name="Skull2" parent="Node" instance=ExtResource("11_21a44")]
+[node name="Skull2" parent="StartBlock" instance=ExtResource("11_21a44")]
 position = Vector2(1574, 203)
 x_speed = 250
 
+[connection signal="sgnl_player_died" from="Player" to="." method="_on_player_sgnl_player_died"]
 [connection signal="timeout" from="LevelBlockTimer" to="." method="_on_level_block_timer_timeout"]

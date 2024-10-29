@@ -29,5 +29,8 @@ func go_explode() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == 'Player':
 		body.velocity.y = -gs.JUMPBOX_LIFT
+		if body.n_jumps > 0:
+			body.n_jumps  -=  1
+		body.animations.spawn_jump_meter()
 		body.unhover()
 		self.queue_free()
