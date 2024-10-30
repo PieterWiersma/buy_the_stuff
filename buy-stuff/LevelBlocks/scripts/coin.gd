@@ -2,17 +2,23 @@ extends Area2D
 
 class_name Coin
 
+@export var x_speed: int
+
 var increment: float
 var explode: bool = false
 
 func _ready() -> void:
-	increment = (randf() * 2) + 3
+	
+	if x_speed == 0:
+		x_speed = clamp((randf() * 400) + 3, 200, 900)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	position.x -=  increment 
-	$CollisionShape2D.position.x -= increment
-	$ColorRect.position.x -= increment
+func _process(delta: float) -> void:
+	position.x -=  x_speed * delta
+	
+	# Better to use notifier,but that seemed buggy..
+	if global_position.x + ($ColorRect.size.x * $ColorRect.scale.x) < 0:
+		queue_free()
 	
 	if explode:
 		$ColorRect.rotation += 2
@@ -27,11 +33,8 @@ func go_explode() -> void:
 	$ExplosionTimer.start()
 	explode = true
 
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	queue_free()
-
 
 func _on_body_entered(body: Node2D) -> void:
-	go_explode() # Replace with function body.
 	if body.name == "Player":
+		go_explode()
 		body.coins += 1

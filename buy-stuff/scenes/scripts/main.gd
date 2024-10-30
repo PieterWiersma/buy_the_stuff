@@ -3,9 +3,12 @@ extends Node
 # will be initial stats
 var player: Player 
 var player_stats = {
-	"max_jumps": 44,
-	"max_hover": 4,
-	"coins": 100
+	"max_jumps": 2,
+	"max_hover": 1,
+	"coins": 100,
+	"level_spawn": {
+		"highscore": 0
+	}
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -14,6 +17,7 @@ func _ready() -> void:
 	$Level.show()
 	if $Level.has_node("Player"):
 		player = $Level.get_node("Player")
+		apply_player_stats()
 	
 
 func _on_menu_play() -> void:
@@ -35,7 +39,7 @@ func _on_exit_shop():
 	$Menu.show()
 	apply_player_stats()
 
-func _on_level_sgnl_player_died() -> void:
+func _on_level_sgnl_player_died(score) -> void:
 	get_player_stats()
 	$Menu.show()
 

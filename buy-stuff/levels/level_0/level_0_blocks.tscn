@@ -1,0 +1,510 @@
+[gd_scene load_steps=7 format=3 uid="uid://56ceirydn6yi"]
+
+[ext_resource type="Script" path="res://levels/level_0/level_0_blocks.gd" id="1_5hchp"]
+[ext_resource type="PackedScene" uid="uid://blw54ox33juq" path="res://LevelBlocks/coin.tscn" id="2_77e1q"]
+[ext_resource type="Script" path="res://levels/level_0/signal_setup.gd" id="2_dcwoy"]
+[ext_resource type="PackedScene" uid="uid://ds25ca0fs84f" path="res://LevelBlocks/platform.tscn" id="3_f3gha"]
+[ext_resource type="PackedScene" uid="uid://d0qn4n25hjihd" path="res://LevelBlocks/jumpbox.tscn" id="5_dk27h"]
+[ext_resource type="PackedScene" uid="uid://d2o56q43c2fa7" path="res://LevelBlocks/skull.tscn" id="7_hp381"]
+
+[node name="Level0Blocks" type="Node2D" groups=["lvl_object"]]
+position = Vector2(27, 101)
+script = ExtResource("1_5hchp")
+
+[node name="0" type="Node2D" parent="."]
+visible = false
+position = Vector2(433, 18)
+script = ExtResource("2_dcwoy")
+
+[node name="coin" parent="0" instance=ExtResource("2_77e1q")]
+position = Vector2(-109, -16)
+x_speed = 250
+
+[node name="coin2" parent="0" instance=ExtResource("2_77e1q")]
+position = Vector2(16, -18)
+x_speed = 250
+
+[node name="coin3" parent="0" instance=ExtResource("2_77e1q")]
+position = Vector2(143, -14)
+x_speed = 250
+
+[node name="Box" parent="0" instance=ExtResource("5_dk27h")]
+position = Vector2(-315, 287)
+x_speed = 250
+
+[node name="Box2" parent="0" instance=ExtResource("5_dk27h")]
+position = Vector2(449, 59)
+x_speed = 250
+
+[node name="Box3" parent="0" instance=ExtResource("5_dk27h")]
+position = Vector2(969, 258)
+x_speed = 250
+
+[node name="Platform" parent="0" instance=ExtResource("3_f3gha")]
+position = Vector2(350, 222)
+scale = Vector2(0.297249, 0.891809)
+x_speed = 370
+
+[node name="Skull2" parent="0" instance=ExtResource("7_hp381")]
+position = Vector2(417, 293)
+scale = Vector2(1, 1.00846)
+
+[node name="Skull5" parent="0" instance=ExtResource("7_hp381")]
+position = Vector2(-21, 309)
+scale = Vector2(4.30565, 4.74763)
+
+[node name="Skull7" parent="0" instance=ExtResource("7_hp381")]
+position = Vector2(20, 202)
+scale = Vector2(2.27861, 2.14281)
+
+[node name="Skull3" parent="0" instance=ExtResource("7_hp381")]
+position = Vector2(204, 231)
+
+[node name="Skull6" parent="0" instance=ExtResource("7_hp381")]
+position = Vector2(204, 231)
+scale = Vector2(2.27861, 2.14281)
+
+[node name="Skull4" parent="0" instance=ExtResource("7_hp381")]
+position = Vector2(-137, 121)
+scale = Vector2(3.18283, 3.09188)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="0"]
+position = Vector2(-295, 119)
+scale = Vector2(5.7, 6.1)
+
+[node name="1" type="Node2D" parent="."]
+position = Vector2(0, -181)
+script = ExtResource("2_dcwoy")
+
+[node name="Platform" parent="1" instance=ExtResource("3_f3gha")]
+position = Vector2(161, 497)
+scale = Vector2(0.3, 1)
+x_speed = 300
+
+[node name="JumpBox" parent="1" instance=ExtResource("5_dk27h")]
+position = Vector2(469, 442)
+x_speed = 300
+
+[node name="JumpBox2" parent="1" instance=ExtResource("5_dk27h")]
+position = Vector2(538, 343)
+x_speed = 300
+
+[node name="JumpBox3" parent="1" instance=ExtResource("5_dk27h")]
+position = Vector2(863, 409)
+x_speed = 300
+
+[node name="JumpBox4" parent="1" instance=ExtResource("5_dk27h")]
+position = Vector2(1094, 416)
+x_speed = 300
+
+[node name="coin" parent="1" instance=ExtResource("2_77e1q")]
+position = Vector2(634, 223)
+x_speed = 300
+
+[node name="Skull3" parent="1" instance=ExtResource("7_hp381")]
+position = Vector2(556, 465)
+scale = Vector2(3.82184, 4.23776)
+x_speed = 300
+
+[node name="Skull" parent="1" instance=ExtResource("7_hp381")]
+position = Vector2(1105, 124)
+x_speed = 350
+
+[node name="Skull5" parent="1" instance=ExtResource("7_hp381")]
+position = Vector2(1095, 514)
+scale = Vector2(2.16337, 2.49454)
+x_speed = 310
+
+[node name="Skull6" parent="1" instance=ExtResource("7_hp381")]
+position = Vector2(140, 151)
+scale = Vector2(1.69634, 1.91885)
+x_speed = 300
+
+[node name="Skull4" parent="1" instance=ExtResource("7_hp381")]
+position = Vector2(225, 182)
+x_speed = 300
+
+[node name="Skull2" parent="1" instance=ExtResource("7_hp381")]
+position = Vector2(601, 420)
+x_speed = 300
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="1"]
+position = Vector2(110, 440)
+
+[node name="2" type="Node2D" parent="."]
+visible = false
+position = Vector2(-2, -3)
+script = ExtResource("2_dcwoy")
+
+[node name="Platform" parent="2" instance=ExtResource("3_f3gha")]
+position = Vector2(50, 61)
+scale = Vector2(0.3, 1)
+x_speed = 300
+
+[node name="coin" parent="2" instance=ExtResource("2_77e1q")]
+position = Vector2(196, 11)
+x_speed = 300
+
+[node name="JumpBox4" parent="2" instance=ExtResource("5_dk27h")]
+position = Vector2(675, 231)
+x_speed = 300
+
+[node name="JumpBox5" parent="2" instance=ExtResource("5_dk27h")]
+position = Vector2(878, 228)
+x_speed = 300
+
+[node name="JumpBox6" parent="2" instance=ExtResource("5_dk27h")]
+position = Vector2(1099, 233)
+x_speed = 300
+
+[node name="coin2" parent="2" instance=ExtResource("2_77e1q")]
+position = Vector2(271, 9)
+x_speed = 300
+
+[node name="coin3" parent="2" instance=ExtResource("2_77e1q")]
+position = Vector2(356, 8)
+x_speed = 300
+
+[node name="Skull" parent="2" instance=ExtResource("7_hp381")]
+position = Vector2(923, 361)
+x_speed = 400
+
+[node name="Skull2" parent="2" instance=ExtResource("7_hp381")]
+position = Vector2(404, 247)
+x_speed = 290
+
+[node name="Skull3" parent="2" instance=ExtResource("7_hp381")]
+position = Vector2(119, 169)
+scale = Vector2(3.1855, 3.48142)
+x_speed = 290
+
+[node name="Skull4" parent="2" instance=ExtResource("7_hp381")]
+position = Vector2(759, 320)
+scale = Vector2(2.41109, 2.84519)
+x_speed = 290
+
+[node name="Skull5" parent="2" instance=ExtResource("7_hp381")]
+position = Vector2(588, 343)
+scale = Vector2(1.67428, 1.68357)
+x_speed = 290
+
+[node name="Skull6" parent="2" instance=ExtResource("7_hp381")]
+position = Vector2(1128, -69)
+scale = Vector2(1.67428, 1.68357)
+x_speed = 360
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="2"]
+position = Vector2(58, 214)
+
+[node name="3" type="Node2D" parent="."]
+visible = false
+position = Vector2(-2, -3)
+script = ExtResource("2_dcwoy")
+
+[node name="Platform" parent="3" instance=ExtResource("3_f3gha")]
+position = Vector2(6, 229)
+scale = Vector2(0.3, 1)
+x_speed = 300
+
+[node name="coin" parent="3" instance=ExtResource("2_77e1q")]
+position = Vector2(446, 174)
+x_speed = 300
+
+[node name="coin2" parent="3" instance=ExtResource("2_77e1q")]
+position = Vector2(155, 163)
+x_speed = 300
+
+[node name="coin3" parent="3" instance=ExtResource("2_77e1q")]
+position = Vector2(309, 39)
+x_speed = 300
+
+[node name="Skull" parent="3" instance=ExtResource("7_hp381")]
+position = Vector2(1205, 319)
+scale = Vector2(1.71915, 1.69108)
+x_speed = 400
+
+[node name="Skull2" parent="3" instance=ExtResource("7_hp381")]
+position = Vector2(279, 135)
+scale = Vector2(1.4617, 1.6717)
+x_speed = 300
+
+[node name="Skull3" parent="3" instance=ExtResource("7_hp381")]
+position = Vector2(190, 333)
+scale = Vector2(3.06636, 3.622)
+x_speed = 300
+
+[node name="Skull4" parent="3" instance=ExtResource("7_hp381")]
+position = Vector2(515, 277)
+scale = Vector2(2.06109, 2.55212)
+x_speed = 300
+
+[node name="Skull5" parent="3" instance=ExtResource("7_hp381")]
+position = Vector2(970, -76)
+scale = Vector2(2.06109, 2.55212)
+x_speed = 300
+
+[node name="Skull6" parent="3" instance=ExtResource("7_hp381")]
+position = Vector2(1045, 8)
+scale = Vector2(1.53267, 1.91815)
+x_speed = 300
+
+[node name="Skull7" parent="3" instance=ExtResource("7_hp381")]
+position = Vector2(841, -54)
+scale = Vector2(1.53267, 1.91815)
+x_speed = 300
+
+[node name="JumpBox7" parent="3" instance=ExtResource("5_dk27h")]
+position = Vector2(716, 213)
+x_speed = 300
+
+[node name="JumpBox8" parent="3" instance=ExtResource("5_dk27h")]
+position = Vector2(966, 400)
+x_speed = 300
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="3"]
+position = Vector2(14, 174)
+
+[node name="4" type="Node2D" parent="."]
+visible = false
+position = Vector2(-7, -156)
+script = ExtResource("2_dcwoy")
+
+[node name="JumpBox" parent="4" instance=ExtResource("5_dk27h")]
+position = Vector2(123, 271)
+x_speed = 300
+
+[node name="JumpBox2" parent="4" instance=ExtResource("5_dk27h")]
+position = Vector2(503, 408)
+x_speed = 300
+
+[node name="JumpBox3" parent="4" instance=ExtResource("5_dk27h")]
+position = Vector2(775, 409)
+x_speed = 300
+
+[node name="JumpBox4" parent="4" instance=ExtResource("5_dk27h")]
+position = Vector2(1028, 408)
+x_speed = 300
+
+[node name="coin" parent="4" instance=ExtResource("2_77e1q")]
+position = Vector2(230, 138)
+x_speed = 300
+
+[node name="coin2" parent="4" instance=ExtResource("2_77e1q")]
+position = Vector2(380, 260)
+x_speed = 300
+
+[node name="coin3" parent="4" instance=ExtResource("2_77e1q")]
+position = Vector2(304, 185)
+x_speed = 300
+
+[node name="Skull" parent="4" instance=ExtResource("7_hp381")]
+position = Vector2(739, 473)
+x_speed = 400
+
+[node name="Skull3" parent="4" instance=ExtResource("7_hp381")]
+position = Vector2(843, 469)
+scale = Vector2(1.9635, 2.23513)
+x_speed = 400
+
+[node name="Skull4" parent="4" instance=ExtResource("7_hp381")]
+position = Vector2(940, 126)
+x_speed = 290
+
+[node name="Skull5" parent="4" instance=ExtResource("7_hp381")]
+position = Vector2(304, 506)
+scale = Vector2(2.6886, 2.85194)
+x_speed = 400
+
+[node name="Skull6" parent="4" instance=ExtResource("7_hp381")]
+position = Vector2(527, 124)
+x_speed = 320
+
+[node name="Skull2" parent="4" instance=ExtResource("7_hp381")]
+position = Vector2(197, 335)
+x_speed = 290
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="4"]
+position = Vector2(4, 276)
+
+[node name="5" type="Node2D" parent="."]
+visible = false
+position = Vector2(-7, -24)
+script = ExtResource("2_dcwoy")
+
+[node name="Platform" parent="5" instance=ExtResource("3_f3gha")]
+position = Vector2(341, 582)
+rotation = -1.56075
+scale = Vector2(0.3, 1)
+x_speed = 300
+color = "#660066"
+
+[node name="JumpBox" parent="5" instance=ExtResource("5_dk27h")]
+position = Vector2(199, 132)
+x_speed = 300
+
+[node name="JumpBox3" parent="5" instance=ExtResource("5_dk27h")]
+position = Vector2(644, 329)
+x_speed = 300
+
+[node name="JumpBox4" parent="5" instance=ExtResource("5_dk27h")]
+position = Vector2(773, 451)
+x_speed = 300
+
+[node name="JumpBox5" parent="5" instance=ExtResource("5_dk27h")]
+position = Vector2(991, 103)
+x_speed = 300
+
+[node name="JumpBox2" parent="5" instance=ExtResource("5_dk27h")]
+position = Vector2(121, 297)
+x_speed = 300
+
+[node name="coin" parent="5" instance=ExtResource("2_77e1q")]
+position = Vector2(306, -1)
+x_speed = 300
+
+[node name="coin2" parent="5" instance=ExtResource("2_77e1q")]
+position = Vector2(456, 121)
+x_speed = 300
+
+[node name="coin3" parent="5" instance=ExtResource("2_77e1q")]
+position = Vector2(380, 46)
+x_speed = 300
+
+[node name="Skull" parent="5" instance=ExtResource("7_hp381")]
+position = Vector2(247, 329)
+x_speed = 400
+
+[node name="Skull4" parent="5" instance=ExtResource("7_hp381")]
+position = Vector2(420, 485)
+x_speed = 400
+
+[node name="Skull3" parent="5" instance=ExtResource("7_hp381")]
+position = Vector2(348, 264)
+scale = Vector2(3.04908, 3.29458)
+x_speed = 300
+
+[node name="Skull5" parent="5" instance=ExtResource("7_hp381")]
+position = Vector2(635, -41)
+scale = Vector2(2.07605, 2.5798)
+x_speed = 300
+
+[node name="Skull2" parent="5" instance=ExtResource("7_hp381")]
+position = Vector2(273, 196)
+x_speed = 290
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="5"]
+position = Vector2(274, 426)
+scale = Vector2(3.3, -2.8)
+
+[node name="6" type="Node2D" parent="."]
+visible = false
+position = Vector2(29, -174)
+script = ExtResource("2_dcwoy")
+
+[node name="Platform" parent="6" instance=ExtResource("3_f3gha")]
+position = Vector2(449, 291)
+rotation = -1.56075
+scale = Vector2(0.3, 1)
+x_speed = 250
+color = "#660066"
+
+[node name="JumpBox3" parent="6" instance=ExtResource("5_dk27h")]
+position = Vector2(433, 647)
+x_speed = 300
+
+[node name="JumpBox4" parent="6" instance=ExtResource("5_dk27h")]
+position = Vector2(8, 405)
+x_speed = 300
+
+[node name="JumpBox5" parent="6" instance=ExtResource("5_dk27h")]
+position = Vector2(754, 572)
+x_speed = 300
+
+[node name="JumpBox6" parent="6" instance=ExtResource("5_dk27h")]
+position = Vector2(843, 424)
+x_speed = 300
+
+[node name="coin" parent="6" instance=ExtResource("2_77e1q")]
+position = Vector2(1138, 270)
+x_speed = 300
+
+[node name="coin2" parent="6" instance=ExtResource("2_77e1q")]
+position = Vector2(952, 138)
+x_speed = 300
+
+[node name="coin3" parent="6" instance=ExtResource("2_77e1q")]
+position = Vector2(572, 501)
+x_speed = 300
+
+[node name="coin4" parent="6" instance=ExtResource("2_77e1q")]
+position = Vector2(572, 501)
+x_speed = 300
+
+[node name="Skull" parent="6" instance=ExtResource("7_hp381")]
+position = Vector2(351, 278)
+x_speed = 270
+
+[node name="Skull2" parent="6" instance=ExtResource("7_hp381")]
+position = Vector2(487, 90)
+scale = Vector2(2.45919, 2.74691)
+x_speed = 290
+
+[node name="Skull3" parent="6" instance=ExtResource("7_hp381")]
+position = Vector2(411, 128)
+scale = Vector2(1.80932, 2.10335)
+x_speed = 290
+
+[node name="Skull4" parent="6" instance=ExtResource("7_hp381")]
+position = Vector2(541, 204)
+scale = Vector2(1.64975, 1.66473)
+x_speed = 290
+
+[node name="Skull5" parent="6" instance=ExtResource("7_hp381")]
+position = Vector2(1064, 681)
+x_speed = 400
+
+[node name="Skull6" parent="6" instance=ExtResource("7_hp381")]
+position = Vector2(888, 604)
+scale = Vector2(2.45919, 2.74691)
+x_speed = 290
+
+[node name="Skull7" parent="6" instance=ExtResource("7_hp381")]
+position = Vector2(882, 472)
+scale = Vector2(1.80932, 2.10335)
+x_speed = 290
+
+[node name="Skull8" parent="6" instance=ExtResource("7_hp381")]
+position = Vector2(994, 538)
+scale = Vector2(1.64975, 1.66473)
+x_speed = 290
+
+[node name="Skull10" parent="6" instance=ExtResource("7_hp381")]
+position = Vector2(52, 529)
+scale = Vector2(2.45919, 2.74691)
+x_speed = 290
+
+[node name="Skull9" parent="6" instance=ExtResource("7_hp381")]
+position = Vector2(183, 607)
+x_speed = 400
+
+[node name="Skull11" parent="6" instance=ExtResource("7_hp381")]
+position = Vector2(-26, 555)
+scale = Vector2(1.80932, 2.10335)
+x_speed = 290
+
+[node name="Skull12" parent="6" instance=ExtResource("7_hp381")]
+position = Vector2(85, 471)
+scale = Vector2(1.64975, 1.66473)
+x_speed = 290
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="6"]
+position = Vector2(274, 426)
+scale = Vector2(3.3, -2.8)
+
+[connection signal="screen_exited" from="0/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="1/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="2/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="3/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="4/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="5/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="6/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
