@@ -19,6 +19,7 @@ var size: Vector2
 var color_rect: ColorRect
 var animations: Object
 var jump: Object
+var light: PointLight2D
 
 # Variables for others to read
 var floored: bool = false
@@ -40,13 +41,15 @@ func _ready() -> void:
 	self.size = $ColorRect.size
 	self.color_rect = $ColorRect
 	self.animations = $Animations
-	self.add_to_group(gs.GRAVITY_GROUP)
 	self.jump = $Jump
+	self.light = $PointLight2D
 	
 	if self.player_color:
 		self.color_rect.color = self.player_color
-	print(self.color_rect.color)
 	$Animations.set_animation('walk')
+	
+	self.fugue_state()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -61,7 +64,7 @@ func _process(delta: float) -> void:
 		$Jump.jump_out()
 		$Jump.unhover()
 		$Animations.set_animation('walk')
-
+	print(self.get_groups())
 
 func _physics_process(delta: float) -> void:
 	# This handles the player movement, though actual inputs are
@@ -92,17 +95,32 @@ func unhover():
 	$Jump.unhover()
 
 
+func fugue_state():
+	print("fugue")
+	$SwipeScreen.set_process(false)
+	$NormalCollision.disabled = true
+	self.remove_from_group('gravity_affected')
+	self.hide()
+
+
+func unfugue_state():
+	print("unfugue")
+	$SwipeScreen.set_process(true)
+	$NormalCollision.disabled = false
+	self.add_to_group('gravity_affected')
+	self.show()
+
 func die():
 	if not is_dead:
+		fugue_state()
 		sgnl_player_died.emit()
-		self.hide()
 		is_dead = true
 		print('Player Died')
-
 
 func start(x:int, y:int):
 	self.level_position = Vector2(x, y)
 	if is_dead:
+		unfugue_state()
 		self.show()
 		self.position = self.level_position
 		is_dead = false

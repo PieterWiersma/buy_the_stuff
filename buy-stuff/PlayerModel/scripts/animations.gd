@@ -41,13 +41,6 @@ func set_animation(animation: String):
 func do_effect(effect: String):
 	# Effect manipulate shaders, the timer resets parameters
 	if effect == 'jump':
-		# Adapt Shader
-		# TODO 
-		player.get_node('ColorRect').material.set_shader_parameter('bness', 0.1)
-		player.get_node('ColorRect').material.set_shader_parameter('fall_off_scale', 2)
-		player.get_node('EffectTimer').wait_time = 0.1
-		player.get_node('EffectTimer').start()
-		
 		spawn_jump_meter()
 		
 
@@ -57,9 +50,3 @@ func spawn_jump_meter():
 	new_jump_meter.player = player
 	new_jump_meter.visible = player.visible
 	add_child(new_jump_meter)
-
-	
-func _on_effect_timer_timeout() -> void:
-	player.get_node('ColorRect').material.set_shader_parameter('bness', 0.3)
-	player.get_node('ColorRect').material.set_shader_parameter('fall_off_scale', 3) # Replace with function body.
-	player.get_node('ColorRect').material.set_shader_parameter('rect_size', Vector2(.12, .12)) 

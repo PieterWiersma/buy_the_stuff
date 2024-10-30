@@ -10,7 +10,7 @@ var score: int
 
 # internals
 var cumdelta:float
-var started: bool = false
+var started: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -3,10 +3,7 @@
 [ext_resource type="Script" path="res://scenes/scripts/menu.gd" id="1_8hpx8"]
 [ext_resource type="Texture2D" uid="uid://difi524jggj23" path="res://light.png" id="2_mdaoa"]
 [ext_resource type="Script" path="res://scenes/scripts/start_screen.gd" id="3_xqvjt"]
-
-[sub_resource type="SystemFont" id="SystemFont_rkcg8"]
-font_names = PackedStringArray("Al Bayan")
-subpixel_positioning = 0
+[ext_resource type="FontFile" uid="uid://max3bc3v5q3f" path="res://my-girl-is-retro/MyGirlIsRetroDEMO.ttf" id="4_ekhvm"]
 
 [node name="Menu" type="CanvasGroup"]
 script = ExtResource("1_8hpx8")
@@ -41,13 +38,15 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("3_xqvjt")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 225.0
-offset_top = 140.0
-offset_right = 926.0
-offset_bottom = 333.0
-theme_override_fonts/font = SubResource("SystemFont_rkcg8")
-theme_override_font_sizes/font_size = 128
-text = "BUY STUFF"
+offset_left = -186.0
+offset_top = 147.0
+offset_right = 1319.0
+offset_bottom = 446.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_ekhvm")
+theme_override_font_sizes/font_size = 200
+text = "NODE STUFF"
+horizontal_alignment = 1
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 4.335

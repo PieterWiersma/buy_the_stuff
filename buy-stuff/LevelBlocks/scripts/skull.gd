@@ -11,7 +11,7 @@ func _ready() -> void:
 	if not x_speed:
 		var random_value = clamp((randf() * 2), 1, 2)
 		x_speed = clamp((randf() * 400) + 3, 200, 900)
-		self.scale = Vector2(random_value, random_value)
+	#self.scale = Vector2(random_value, random_value)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

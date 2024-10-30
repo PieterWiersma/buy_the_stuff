@@ -3,7 +3,7 @@ extends Node
 # will be initial stats
 var player: Player 
 var player_stats = {
-	"max_jumps": 4,
+	"max_jumps": 2,
 	"max_hover": 1,
 	"coins": 100,
 	"level_spawn": {
@@ -17,6 +17,7 @@ func _ready() -> void:
 	$Level.show()
 	if $Level.has_node("Player"):
 		player = $Level.get_node("Player")
+		apply_player_stats()
 	
 
 func _on_menu_play() -> void:
@@ -39,7 +40,6 @@ func _on_exit_shop():
 	apply_player_stats()
 
 func _on_level_sgnl_player_died(score) -> void:
-	print('sf')
 	get_player_stats()
 	$Menu.show()
 

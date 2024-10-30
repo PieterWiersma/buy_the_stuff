@@ -19,9 +19,6 @@ var started: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#if not get_parent().name == 'root':
-		#$Player.die()
-	#
 	# Make a background
 	for i in 400:
 		var star = Star.new()
@@ -30,8 +27,11 @@ func _ready() -> void:
 		star.position.x = randf() * 1100
 		add_child(star)
 
-	# Place the player x,y, original_y
-	$Player.position  = Vector2(120,50)
+	$Player.sgnl_player_died.connect(_on_player_sgnl_player_died)
+	if not get_parent().name == 'root':
+		$Player.position  = Vector2(120,50)
+		$Player.fugue_state()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -115,8 +115,11 @@ func start_level() -> void:
 	self.started = true
 	get_tree().call_group("lvl_object", "queue_free")
 	$SkullTimer.wait_time = 3
+	$Player.unfugue_state()
 	$Player.start(250,10)
 	$Background/Score.show()
+	$Player.n_jumps = 0
+	spawn_start_blocks()
 
 
 func _on_player_sgnl_player_died() -> void:
@@ -130,3 +133,11 @@ func _on_player_sgnl_player_died() -> void:
 func _on_dead_timer_timeout() -> void:
 	$Background/DeadLabel.hide()
 	sgnl_player_died.emit(score) 
+
+
+func spawn_start_blocks():
+	for i in 2:
+		var new_box = box_scene.instantiate()
+		new_box.position.y = 400
+		new_box.position.x = 500 + 300 * i
+		add_child(new_box)
